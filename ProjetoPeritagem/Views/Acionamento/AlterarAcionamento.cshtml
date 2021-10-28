@@ -1,0 +1,140 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Alterar Acionamento";
+}
+
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Alterar Acionamento</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("GravarAlteracao","Acionamento")" method="post">
+
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="tipo">Acionamento</label>
+                    <select type="text" class="form-control" id="acionamento" name="Tipo_Acionamento" value="@Model.acionamento.TipoAcionamento">
+                        <option value="@Model.acionamento.TipoAcionamento">@Model.acionamento.TipoAcionamento</option>
+                        <option value="Motor Eletrico">Motor Eletrico</option>
+                        <option value="Motor Hidraúlico">Motor Hidraúlico</option>
+                        <option value="Sem Motor">Sem Motor</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="fabricante">Fabricante</label>
+                    <input type="text" class="form-control" id="fabricante" name="Fabricante" value="@Model.acionamento.Fabricante">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.acionamento.Modelo">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="condicao">Condição</label>
+                    <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                        @{
+                            if (Model.listDisposicao != null)
+                            {
+                                foreach (var it in Model.listDisposicao)
+                                {
+                                    if (it.ID_Disposicao == Model.acionamento.Disposicao.ID_Disposicao)
+                                    {
+                                        <option selected value="@it.ID_Disposicao">@it.Nome</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@it.ID_Disposicao">@it.Nome</option>
+                                    }
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="rotacao">Rotação (Polos)</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">n</span>
+                        <input type="text" class="form-control" id="rotacao" name="Rotacao_Polos" value="@Model.acionamento.RotacaoPolos" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:60px">RPM</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pontencia">Potência</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">p</span>
+                        <input type="text" class="form-control" id="Potencia" name="Potencia" value="@Model.acionamento.Potencia" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:60px">kW</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="carcaca">Carcaça</label>
+                    <input type="text" class="form-control" id="carcaca" name="Carcaca" value="@Model.acionamento.Carcaca">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="teste">Teste do Redutor</label>
+                    <select type="text" class="form-control" id="teste" name="Teste_Redutor">
+                        @{
+                            if (Model.acionamento.Teste)
+                            {
+                                <option selected value="true">Sim</option>
+                                <option value="false">Não</option>
+                            }
+                            else
+                            {
+                                <option value="true">Sim</option>
+                                <option selected value="false">Não</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="tipo_teste">Tipo de Teste</label>
+                    <select type="text" class="form-control" id="tipo_teste" name="Tipo_Teste">
+                        @{
+                            if (Model.acionamento.TipoTeste == "bancada de teste")
+                            {
+                                <option selected value="bancada de teste">Bancada de teste</option>
+                                <option value="manualmente">Manualmente</option>
+                            }
+                            else
+                            {
+                                <option value="bancada de teste">Bancada de teste</option>
+                                <option selected value="manualmente">Manualmente</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="referencia">Descrição</label>
+                <textarea class="form-control" id="descricao" name="Descricao" rows="6">@Model.acionamento.Descricao</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inspecao_visual">Inspeção Visual</label>
+                <textarea class="form-control" id="inspecao_visual" name="Inspecao_Visual" rows="6">@Model.acionamento.InspecaoVisual</textarea>
+            </div>
+
+            <input type="hidden" class="form-control" id="id_acionamento" name="ID_Acionamento" value="@Model.acionamento.Id">
+            <input type="hidden" class="form-control" id="id_peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+
+            <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+        </form>
+
+    </div>
+</div>

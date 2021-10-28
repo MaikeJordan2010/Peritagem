@@ -1,0 +1,120 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+   
+    ViewData["Title"] = "CadastrarPeritagem";
+}
+
+@{ 
+
+    DateTime dt = DateTime.Now;
+    DateTime d = dt.AddDays(12);
+
+
+    var dt_chegada = DateTime.Now.Year + "-" + (DateTime.Now.Month.ToString().Length == 1 ? "0" + DateTime.Now.Month.ToString() : DateTime.Now.Month.ToString()) + "-" + DateTime.Now.Day;
+    var dt_inicio = d.ToString().Split("/")[2].Split(" ")[0] + "-" + d.ToString().Split("/")[1] + "-" + d.ToString().Split("/")[0];
+
+}
+<h2 id="titulo-form">CadastrarPeritagem</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("CadastrarPeritagem","Peritagem")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="descricao">Descrição do Equipamento</label>
+                    <input type="text" class="form-control" id="descricao" name="Descricao" required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cliente">Cliente</label>
+                    <select type="text" class="form-control" id="cliente" name="ID_Cliente">
+                        @{
+                            foreach (var it in Model.listCliente)
+                            {
+                                <option value="@it.Id">@it.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="numNota">Nº Nota</label>
+                    <input type="text" class="form-control" id="numNota" name="NumeroNota" onkeypress="ValidarNumerosInteiro()" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="numContrato">Nº Contrato</label>
+                    <input type="text" class="form-control" id="numContrato" name="NumeroContrato" onkeypress="ValidarNumerosInteiro()" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="numOrcamento">Orçamento</label>
+                    <input type="text" class="form-control" id="numOrcamento" name="NumeroOrcamento" onkeypress="ValidarNumerosInteiro()" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="procuto">Produto</label>
+                    <input type="text" class="form-control" id="produto" name="Produto">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dt_chegada">Data Chegada</label>
+                    <input type="date" class="form-control" id="dt_chegada" name="DT_Chegada" value="@dt_chegada" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_entrada">Data Inicio</label>
+                    <input type="date" class="form-control" id="dt_inicio" name="DT_Inicio" value="@dt_inicio" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_previsao">Previsão</label>
+                    <input type="date" class="form-control" id="dt_previsao" name="DT_Previsao" required />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cliente">Protocolo</label>
+                    <input type="text" class="form-control" id="protocolo" name="Protocolo">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="numNota">Responsável</label>
+                    <input type="text" class="form-control" id="responsavel" name="Responsavel" value="@Model.usuario.Nome" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="numContrato">Setor</label>
+                    <input type="text" class="form-control" id="setor" value="@Model.usuario.Departamento" name="Setor">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="referencia">Referência</label>
+                <textarea class="form-control" id="referencia" name="Referencia" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="motivo">Motivo da Manutenção</label>
+                <textarea class="form-control" id="motivo" name="Motivo_Manutencao" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="referencia">Aplicação</label>
+                <textarea class="form-control" id="aplicacao" name="Aplicacao" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="observacao">Observações</label>
+                <textarea class="form-control" id="observacao" name="Observacao" rows="3"></textarea>
+            </div>
+            <p class="msgErro">Por favor, anexo a NFE junto ao cadastro</p>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Arquivo</label>
+                <input multiple type="file" class="form-control-file" id="documento" name="Documento">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>
+
+<script src="~/js/ValidadorCampos.js"></script>
+<script>
+    function pegarData() {
+        var data = new Date();
+
+        alert(data.getDate() + "/" + (data.getMonth() + 1) + "/"  + data.getFullYear());
+    }
+</script>

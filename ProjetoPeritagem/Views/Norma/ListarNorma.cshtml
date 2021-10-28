@@ -1,0 +1,40 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "ListarMaterial";
+}
+
+<h2 id="titulo-form">Listar Norma</h2>
+
+<div id="main">
+    <div id="tabela-cliente">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">
+                        <a class="badge badge-primary" href="@Url.Action( "InserirNorma", "Norma")">Incluir</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var nor in Model.listNorma)
+                    {
+                <tr>
+                    <th scope="row">@nor.Id</th>
+                    <td>@nor.Nome</td>
+                    <td>@nor.Descricao</td>
+                    <td>
+                        <a class="badge badge-warning" href="@Url.Action( "AlterarNorma", "Norma", new { ID_Norma = nor.Id})">Alterar</a><br />
+                        <a class="badge badge-danger" href="@Url.Action( "ExcluirNorma", "Norma", new { ID_Norma = nor.Id })">Excluir</a><br />
+                    </td>
+                </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Peritagem</name>
+    </assembly>
+    <members>
+        <member name="M:TesteJWT.Controllers.UsuarioAPIController.TodosUsuarios">
+            <summary>
+            //////// FUNÇÃO QUE LISTA TODOS USUÁRIOS
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

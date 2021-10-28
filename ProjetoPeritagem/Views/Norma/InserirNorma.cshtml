@@ -1,0 +1,25 @@
+﻿@{
+   
+    ViewData["Title"] = "Cadastrar Norma";
+}
+
+<h2 id="titulo-form">Cadastrar Norma</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("CadastrarNorma","Norma")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="none">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea  class="form-control-file" id="descricao" name="Descricao"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>
+

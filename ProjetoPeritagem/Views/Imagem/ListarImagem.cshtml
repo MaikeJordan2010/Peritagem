@@ -1,0 +1,93 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+
+        <partial name="_SubMenu" />
+        <h2 id="titulo-form">Listar Imagem</h2>
+        <a class="badge badge-primary" href="@Url.Action("InserirImagem", "Imagem", new { ID_Peritagem = Model.ID_Peritagem, ID_Peca = Model.ID_Peca, ID_Carcaca = Model.ID_Carcaca, ID_Acionamento = Model.ID_Acionamento, ID_ItemDiverso = Model.ID_ItemDiverso, ID_Redutor = Model.ID_Redutor })">Incluir</a>
+        <div id="main">
+           
+                @{
+                    foreach (var img in Model.listImagem)
+                                {
+                        <div class="album_img">
+                            @{
+                                if (img.Width > img.Height)
+                                {
+                                    <div class="card" style="height:100%">
+                                        <div class="card" style="width: 90%;margin-left:5%; height:auto">
+                                            <img src="../@img.Path_Img" class="card-img-top" alt="@img.Descricao" onclick="abrirTelaCheia('../@img.Path_Img')">
+                                        </div>
+                                        <div class="card-body" style="width: 100%; ">
+                                            <p class="card-text">@img.Descricao.</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="card" style="height:100%">
+                                        <div class="card" style="width: 50%; margin-left:25%; height:auto">
+                                            <img src="../@img.Path_Img" class="card-img-top" alt="@img.Descricao" onclick="abrirTelaCheia('../@img.Path_Img')">
+                                        </div>
+                                        <div class="card-body" style="width: 100%; ">
+                                            <p class="card-text">@img.Descricao.</p>
+                                        </div>
+                                    </div>
+                                }
+                              }
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+        <div id="main_albun_tela_cheia" onclick="fecharTelaCheia()">
+            <div id="mostrar_img_album_div" onclick="fecharTelaCheia()" >
+                <img id="mostrar_img_album_img_tela_cheia" class="rounded mx-auto d-block" src="" alt="" />
+            </div>
+        </div>
+
+
+
+    <script>
+        function trocarImg(img) {
+            var image = document.getElementById("mostrar_img_album_img");
+            
+            image.src = img;
+            image.style.display = "block"
+            
+        }
+    </script>
+
+    <script>
+        function trocarImgTelacheia(img) {
+            var image = document.getElementById("mostrar_img_album_img_tela_cheia");
+            image.src = img;
+        }
+    </script>
+
+    <script>
+
+        function abrirTelaCheia(img) {
+            var div = document.getElementById("main_albun_tela_cheia");
+            var imagem = document.getElementById("mostrar_img_album_img_tela_cheia");
+            div.style.display = "block";
+            imagem.src = img;
+
+        }
+
+        function fecharTelaCheia(img) {
+            var body = document.body;
+
+            var div = document.getElementById("main_albun_tela_cheia");
+            div.style.display = "none";
+            body.style.overflowY = "scroll"
+
+        }
+
+    </script>
+
+
+
+
+

@@ -1,0 +1,26 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+   
+    ViewData["Title"] = "CadastrarCliente";
+}
+
+<h2 id="titulo-form">CadastrarPeritagem</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("InserirCliente","Cliente")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="numContrato">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Arquivo</label>
+                <input type="file" class="form-control-file" id="documento" name="img">
+            </div>
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>
+

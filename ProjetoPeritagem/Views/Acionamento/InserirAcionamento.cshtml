@@ -1,0 +1,112 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Acionamento";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Inserir Acionamento</h2>
+
+@{
+    var msg = ViewData["msg"];
+    <p class="msgErro">@msg</p>
+}
+
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("CadastrarAcionamento","Acionamento")" method="post">
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="tipo">Acionamento</label>
+                    <select type="text" class="form-control" id="acionamento" name="Tipo_Acionamento">
+                        <option value="Motor Eletrico">Motor Eletrico</option>
+                        <option value="Motor Hidraúlico">Motor Hidraúlico</option>
+                        <option value="Sem Motor">Sem Motor</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fabricante">Fabricante</label>
+                    <input type="text" class="form-control" id="fabricante" name="Fabricante" value="" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" name="Modelo" value="" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="rotacao">Rotação (Polos)</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">n</span>
+                        <input type="text" class="form-control" id="rotacao" name="Rotacao_Polos" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:60px">RPM</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="pontencia">Potência</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">p</span>
+                        <input type="text" class="form-control" id="Potencia" name="Potencia" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:60px">kW</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label for="carcaca">Carcaça</label>
+                    <input type="text" class="form-control" id="carcaca" name="Carcaca" value="" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="condicao">Condição</label>
+                    <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                        @{
+                            foreach (var it in Model.listDisposicao)
+                            {
+                                <option value="@it.ID_Disposicao">@it.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="teste">Teste do Redutor</label>
+                    <select type="text" class="form-control" id="teste" name="Teste_Redutor">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="tipo_teste">Tipo de Teste</label>
+                    <select type="text" class="form-control" id="tipo_teste" name="Tipo_Teste">
+                        <option value="bancada de teste">Bancada de teste</option>
+                        <option value="manualmente">Manualmente</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="referencia">Descrição</label>
+                <textarea class="form-control" id="descricao" name="Descricao" rows="6"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inspecao_visual">Inspeção Visual</label>
+                <textarea class="form-control" id="inspecao_visual" name="Inspecao_Visual" rows="6"></textarea>
+            </div>
+
+            <input type="hidden" class="form-control" id="id_peritagem" name="ID_Peritagem" value="@Model.peritagem.Id">
+
+            <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+        </form>
+
+    </div>
+</div>
+
+<script src="~/js/ValidadorCampos.js"></script>

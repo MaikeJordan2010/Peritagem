@@ -1,0 +1,22 @@
+﻿@{
+   
+    ViewData["Title"] = "Cadastrar Disposicao";
+}
+
+<h2 id="titulo-form">Cadastrar Disposicao</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("InserirDisposicao","Disposicao")" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="numContrato">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome">
+                </div>
+            </div>
+           
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>
+

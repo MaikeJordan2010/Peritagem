@@ -1,0 +1,31 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "InserirImagem";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Inserir Imagem</h2>
+
+<form action="@Url.Action("CadastrarImagem","Imagem")" method="post" enctype="multipart/form-data">
+    <input type="file" name="File" multiple onfocus="getLocation()" />
+    <input type="hidden" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+    <input type="hidden" name="ID_Carcaca" value="@Model.ID_Carcaca" />
+    <input type="hidden" name="ID_Peca" value="@Model.ID_Peca" />
+    <input type="hidden" name="ID_Redutor" value="@Model.ID_Redutor" />
+    <input type="hidden" name="ID_Acionamento" value="@Model.ID_Acionamento" />
+    <input type="hidden" name="ID_ItemDiverso" value="@Model.ID_ItemDiverso" />
+    <input type="hidden" id="latitude" name="Latitude" />
+    <input type="hidden" id="longitude" name="Longitude" />
+
+    <div class="form-group">
+        <label for="descricao">Decrição</label>
+        <textarea class="form-control" id="descricao" name="Descricao" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <input class="btn btn-primary mb-2" type="submit" value="Enviar" />
+    </div>
+</form>
+
+<script src="~/js/Localizacao.js"></script>

@@ -1,0 +1,272 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+
+    <partial name="_SubMenu" />
+
+    <h2 id="titulo-form">Alterar Informações do Equipamento</h2>
+    <div id="main">
+        <div id="formulario">
+            <form action="@Url.Action("GravarAlteracao","Redutor")" method="post">
+                <div class="form-row">
+                    @{
+                        if (Model.peritagem.Nfe != 0)
+                        {
+                            <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
+                                    <label for="cliente">Cliente</label>
+                                    <input type="text" class="form-control" id="cliente" name="Cliente" value="@Model.peritagem.Cliente.Nome" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
+                                    <label for="nota_fiscal">Nota Fiscal</label>
+                                    <input type="text" class="form-control" id="nota_fiscal" name="NFE" value="@Model.peritagem.Nfe" disabled>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
+                            <label for="numContrato">Contrato</label>
+                            <input type="text" class="form-control" id="contrato" name="Contrato" value="@Model.peritagem.NumeroContrato" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
+                            <label for="ordem_servico">Cliente</label>
+                            <input type="text" class="form-control" id="ordem_servico" name="OrdemServico" value="@Model.peritagem.OrdemServico.Num_ordemServico" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
+                            <label for="Produto">Protocolo</label>
+                            <input type="text" class="form-control" id="protocolo" name="Protocolo" value="@Model.peritagem.Protocolo" disabled>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="cliente">Dados do Equipamento</label>
+                        <select type="text" class="form-control" id="TipoDados" name="TipoDados">
+                            <option value="Dados Placa">Dados da placa</option>
+                            <option value="Catalogo">Catálogo</option>
+                            <option value="Informações do cliente">Informações do Cliente</option>
+                            <option value="Sem Identificação presente">Sem Identificação Presente</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="fabricabte">Fabricante</label>
+                        <input type="text" class="form-control" id="fabricante" name="Fabricante" value="@Model.Redutor.Fabricante">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="modelo">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="Modelo" value="@Model.Redutor.Modelo">
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="rotacaoIN">Rotação IN</label><br>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">n1</span>
+                            <input type="text" class="form-control" name="RotacaoIN" value="@Model.Redutor.RotacaoIN" onkeypress="ValidarNumerosFloat()">
+                            <span class="input-group-text" id="addon-wrapping" style="width:55px">RPM</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="rotacaoIN">Rotacao OUT</label><br>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">n2</span>
+                            <input type="text" class="form-control" id="rotacaoOUT" name="rotacaoOUT" value="@Model.Redutor.RotacaoOUT" onkeypress="ValidarNumerosFloat()">
+                            <span class="input-group-text" id="addon-wrapping" style="width:55px">RPM</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="reducao">Redução</label>
+                        <input type="text" class="form-control" id="reducao" name="Reducao" value="@Model.Redutor.Reducao">
+                    </div>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-4">
+                        <label for="potencia">Potência</label><br>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">P</span>
+                            <input type="text" class="form-control" name="Potencia" value="@Model.Redutor.Potencia">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">kW</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="fator_servico">Fator Serviço</label><br>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">FS</span>
+                            <input type="text" class="form-control" id="fator_servico" name="FatorServico" value="@Model.Redutor.FatorServico">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="reducao">Ano Fabricação</label>
+                        <input type="text" class="form-control" id="ano_fabricacao" name="AnoFabricacao" value="@Model.Redutor.AnoFabricacao">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="viscosidade">Viscosidade</label><br>
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping" style="width:70px">ISO VG</span>
+                            <input type="text" class="form-control" id="viscosidade" name="Viscosidade" value="@Model.Redutor.Viscosidade" />
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">cSt</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="lubrificacao">Lubrificação</label>
+                        <input type="text" class="form-control" id="lubrificacao" name="Lubrificacao" value="@Model.Redutor.Lubrificacao">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="volume">Volume</label>
+                        <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" id="volume" name="Volume" value="@Model.Redutor.Volume">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">L</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="lubrificacao">Sentido</label>
+                        <select type="text" class="form-control" id="sentido" name="Sentido">
+                            @{
+                                if (Model.Redutor.Sentido == "Horário")
+                                {
+                                    <option selected value="Horário">Horário</option>
+                                    <option value="Anti-horário">Anti-horário</option>
+                                    <option value="Bidirecional">Bidirecional</option>
+                                }
+                                else if (Model.Redutor.Sentido == "Anti-horário")
+                                {
+                                    <option value="Horário">Horário</option>
+                                    <option selected value="Anti-horário">Anti-horário</option>
+                                    <option value="Bidirecional">Bidirecional</option>
+
+                                }
+                                else
+                                {
+                                    <option value="Horário">Horário</option>
+                                    <option value="Anti-horário">Anti-horário</option>
+                                    <option selected value="Bidirecional">Bidirecional</option>
+
+                                }
+                            }
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="lubrificacao">Visto</label>
+                        <select type="text" class="form-control" id="visto" name="Visto">
+                            @{
+                                if (Model.Redutor.Visto == "Visto da Entrada")
+                                {
+                                    <option selected value="Visto da Entrada">Visto da Entrada</option>
+                                    <option value="Visto da Saida">Visto da Saída</option>
+                                }
+                                else
+                                {
+                                    <option value="Visto da Entrada">Visto da Entrada</option>
+                                    <option selected value="Visto da Saida">Visto da Saída</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="referencia">Aplicação</label>
+                    <textarea class="form-control" id="aplicacao" name="Aplicacao" rows="3">@Model.Redutor.Aplicacao</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="referencia">Motivo Manutenção</label>
+                    <textarea class="form-control" id="MotivoManutencao" name="MotivoManutencao" rows="3">@Model.Redutor.MotivoManutencao</textarea>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <div class="form-check">
+                            <label for="volume">Pintura</label> <br />
+                            @{
+                                if (Model.Redutor.PinturaPadraoSantana)
+                                {
+                                    <input class="form-check-input" type="checkbox" name="PinturaPadraoSantana" value="true" id="PinturaPadraoSantana" checked>
+                                }
+                                else
+                                {
+                                    <input class="form-check-input" type="checkbox" name="PinturaPadraoSantana" value="true" id="PinturaPadraoSantana">
+                                }
+                            }
+                            <label class="form-check-label" for="PinturaPadraoSantana"> 
+                                Pintura Padrão Santana
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="peso">Peso</label>
+                        <div class="input-group flex-nowrap">
+                            <input type="text" class="form-control" id="peso" name="Peso" value="@Model.Redutor.Peso">
+                            <span class="input-group-text" id="addon-wrapping" style="width:40px">Kg</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="cor">Cor</label>
+                        <input type="text" class="form-control" id="cor" name="Cor" value="@Model.Redutor.Cor">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="desenha">Desenho</label>
+                        <input type="text" class="form-control" id="desenho" name="Desenho" value="@Model.Redutor.Desenho">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="referencia">Outros</label>
+                    <textarea class="form-control" id="outro" name="Outro" rows="3">@Model.Redutor.Outro</textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="referencia">Posição de Montagem</label>
+                    <textarea class="form-control" id="posicao_montagem" name="PosicaoMontagem" rows="6">@Model.Redutor.PosicaoMontagem</textarea>
+                </div>
+
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.peritagem.Id" />
+                    <input type="hidden" class="form-control" id="ID_Redutor" name="ID_Redutor" value="@Model.Redutor.Id" />
+
+                </div>
+
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+
+            </form>
+        </div>
+    </div>
+
+
+

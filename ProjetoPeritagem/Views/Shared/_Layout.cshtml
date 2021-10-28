@@ -1,0 +1,78 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    var usuario = ViewData["Usuario"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="~/css/style-layout.css">
+    <link rel="stylesheet" href="~/bootstrap-dist/css/bootstrap.min.css">
+
+    <title>@ViewData["Title"] - Fresadora Santana</title>
+
+</head>
+
+<body>
+
+    <div id="top">
+        <div id="top-btn">
+            <input type="checkbox" id="btn-menu">
+            <label id="lbl-menu" for="btn-menu"><img src="~/images/icone-btn-menu.png"> </label>
+            <div id="menu">
+                <ul>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Criar / Novo", "InserirPeritagem", "Peritagem")</a>
+                    </li>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Pesquisar", "Index", "Home")</a>
+                    </li>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Disposicao", "Index", "Disposicao")</a>
+                    </li>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Materiais", "ListarMaterial", "Material")</a>
+                    </li>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Norma", "ListarNorma", "Norma")</a>
+                    </li>
+                    <li class="link-pesquisa">
+                        <a href="#">@Html.ActionLink("Configuração", "ListarConfiguracao", "Configuracao")</a>
+                    </li>
+                    <li class="link-pesquisa">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="top-info">
+            <div id="logo">
+                <img src="~/images/logo-fresadora-santana.png" id="logo-img" alt="FresadoraSantana" />
+            </div>
+            <div id="titulo">
+                <h1>Fresadora Santana</h1>
+                <p>Sistema de Peritagem</p>
+            </div>
+            <div id="info-usuario">
+                <p>Bem Vindo! @Model.usuario.Email</p>
+                @*<p>Bem Vindo! @ViewData["Usuario"]  </p>*@
+                       
+            </div>
+            @*<div id="info-usuario">
+                    <p><a target="_blank" href="~/uploads/Aplicativo/Peritagem">Aplicativo</a></p>
+                </div>*@
+            <div id="info-usuario">
+                <p><a href="#">@Html.ActionLink("Sair", "Logout", "Login")</a> </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="conteudo">
+        @RenderBody()
+    </div>
+
+</body>
+</html>
+

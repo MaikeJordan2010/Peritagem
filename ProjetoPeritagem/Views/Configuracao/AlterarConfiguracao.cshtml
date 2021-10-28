@@ -1,0 +1,43 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "AlterarConfiguracao";
+}
+
+<h2 id="titulo-form">Alterar Configuração</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("GravarAlteracao","Configuracao")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="none">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome" value="@Model.configuracao.Nome">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="protocolo">Protocolo</label>
+                    <input type="text" class="form-control" id="protocolo" name="Protocolo" value="@Model.configuracao.Protocolo">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dominio">Dominio</label>
+                    <input type="text" class="form-control" id="dominio" name="Dominio" value="@Model.configuracao.Dominio">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="porta">Porta</label>
+                    <input type="text" class="form-control" id="porta" name="Porta" value="@Model.configuracao.Porta">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea class="form-control-file" id="descricao" name="Descricao">@Model.configuracao.Descricao</textarea>
+            </div>
+
+            <input type="hidden"  name="ID_Configuracao" value="@Model.configuracao.Id">
+
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>

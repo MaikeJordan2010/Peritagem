@@ -1,0 +1,32 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "_SubMenu";
+}
+<div id="sub-menu-geral">
+
+    <div id="sub-menu">
+        <a class="btn btn-link" href="@Url.Action( "Visualizar", "Peritagem", new { ID_Peritagem = Model.ID_Peritagem })" target="_blank">Visualizar</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarRedutor", "Redutor",new { ID_Peritagem = Model.ID_Peritagem })">Info. Equipamento</a>
+        <a class="btn btn-link" href="@Url.Action( "AlterarPeritagem", "Peritagem",new { ID_Peritagem = Model.ID_Peritagem })">Alterar</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarAcionamento", "Acionamento", new { ID_Peritagem = Model.ID_Peritagem })">Acionamento</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarCarcaca", "Carcaca",new { ID_Peritagem = Model.ID_Peritagem })">Carcaça</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarPeca", "Peca", new { ID_Peritagem = Model.ID_Peritagem })">Peças</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarImagem", "Imagem", new { ID_Peritagem = Model.ID_Peritagem })">Album</a>
+        <a class="btn btn-link" href="@Url.Action( "ListarItem", "ItemDiverso", new { ID_Peritagem = Model.ID_Peritagem })">Items Diversos</a>
+        <a class="btn btn-link" href="@Url.Action( "PeritagemPDF", "Peritagem", new { ID_Peritagem = Model.ID_Peritagem })" target="_blank">Gerar PDF</a>
+    </div>
+
+    <div id="info-peritagem">
+        <table>
+            <tr>
+                <td class="table-info-peritagem-td"><strong>Nome: </strong>@Model.peritagem.Nome</td>
+                <td class="table-info-peritagem-td-lateral"><img src="../@Model.peritagem.Cliente.Icone" style="width:40px; margin-left:10px; margin-top:5px" /></td>
+            </tr>
+            <tr>
+                <td class="table-info-peritagem-td"><strong>NFE: </strong>@Model.peritagem.Nfe</td>
+                <td class="table-info-peritagem-td-lateral">@Model.peritagem.Cliente.Nome</td>
+            </tr>
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "AlterarMaterial";
+}
+
+
+<h2 id="titulo-form">Alterar Material</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("GravarAlteracao","Material")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="none">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome" value="@Model.material.Nome" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <textarea class="form-control-file" id="descricao" name="Descricao">@Model.material.Descricao</textarea>
+            </div>
+
+            <input type="hidden"  name="ID_Material" value="@Model.material.Id" />
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

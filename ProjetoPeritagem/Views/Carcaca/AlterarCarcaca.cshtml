@@ -1,0 +1,200 @@
+﻿
+@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Alterar Carcaca";
+}
+
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Alterar Carcaça</h2>
+<div id="main">
+    <div id="formulario">
+        
+        <button id="btn_criarMedida" onclick="adcionarMedida()" style="display:none">+</button>
+
+        <form action="@Url.Action("GravarAlteracao","Carcaca")" method="post">
+
+            <div id="medidas" style="display:none">
+                <div class="form-row" id="medidas_carcaca">
+                    <div class="form-group col-md-1">
+                        <label for="posicao">Posição</label>
+                        <input type="text" class="form-control" id="posicao" name="Posicao" value="" onkeypress="ValidarNumerosInteiro()" required />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="medicao">Medição</label>
+                        <input type="text" class="form-control" id="medicao" name="Medicao" value="" required />
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="tolerancia">Tolerância</label>
+                        <input type="text" class="form-control" id="tolerancia" name="Tolerancia" value="" required />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="descricaoMedida">Descrição</label>
+                        <input type="text" class="form-control" id="descricaoMedida" name="DescricaoMedida" value="" required />
+                    </div>
+                    <input type="hidden" class="form-control" id="id_medicao" name="ID_CarMed" value="0">
+
+                </div>
+            </div>
+            <p onclick="mostrarMedida()">Adicionar Medida</p>
+
+            <div id="medidasAlterar">
+                @{
+                    if (Model.carcaca.Medicao.Count != 0)
+                    {
+                        foreach (var med in Model.carcaca.Medicao)
+                        {
+                            <div class="form-row" id="medidas_carcaca">
+                                <div class="form-group col-md-1">
+                                    <label for="posicao">Posição</label>
+                                    <input type="text" class="form-control" id="posicao" name="Posicao" value="@med.Posicao" onkeypress="ValidarNumerosInteiro()" />
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="medicao">Medição</label>
+                                    <input type="text" class="form-control" id="medicao" name="Medicao" value="@med.Medicao">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="tolerancia">Tolerância</label>
+                                    <input type="text" class="form-control" id="tolerancia" name="Tolerancia" value="@med.Tolerancia">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="descricaoMedida">Descrição Medida</label>
+                                    <input type="text" class="form-control" id="descricaoMedida" name="DescricaoMedida" value="@med.Descricao">
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action( "ExcluirCarcacaMedida", "Carcaca", new { ID_Peritagem = @Model.carcaca.ID_Peritagem, ID_CarMed = med.Id, ID_Carcaca = med.Id_Carcaca})">Excluir</a></li>
+                                </div>
+                                <input type="hidden" class="form-control" id="id_medicao" name="ID_CarMed" value="@med.Id">
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome" value="@Model.carcaca.Nome">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="altura">Altura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">h</span>
+                        <input type="text" class="form-control" id="altura" name="Altura" value="@Model.carcaca.Altura" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="largura">Largura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="largura" name="Largura" value="@Model.carcaca.Largura" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="comprimento">Comprimento</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="comprimento" name="Comprimento" value="@Model.carcaca.Comprimento"/>
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="peso">Peso</label>
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" id="peso" value="@Model.carcaca.Peso">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">Kg</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label for="condicao">Condição</label>
+                        <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                            @{
+                                foreach (var it in Model.listDisposicao)
+                                {
+                                    if (it.ID_Disposicao == Model.carcaca.Disposicao.ID_Disposicao)
+                                    {
+                                        <option selected value="@it.ID_Disposicao"> @it.Nome </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@it.ID_Disposicao"> @it.Nome </option>
+                                    }
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label for="jateamento">Jateamento</label>
+                        <select type="text" class="form-control" id="jateamento" name="Jateamento">
+                            @{
+                                if (Model.carcaca.Jateamento)
+                                {
+                                    <option selected value="true">Sim</option>
+                                    <option value="false">Não</option>
+
+                                }
+                                else
+                                {
+                                    <option value="true">Sim</option>
+                                    <option selected value="false">Não</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">descricao</label>
+                <textarea class="form-control" id="descricao" name="Descricao" rows="6">@Model.carcaca.Descricao</textarea>
+            </div>
+
+            <input type="hidden" class="form-control" id="id_peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+            <input type="hidden" class="form-control" id="id_carcaca" name="ID_Carcaca" value="@Model.carcaca.Id">
+
+            <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+        </form>
+
+    </div>
+</div>
+<script src="~/js/ValidadorCampos.js"> </script>
+<script>
+    function adcionarMedida() {
+
+        var medida = document.getElementById("medidas");
+        var medica_carcaca = document.getElementById("medidas_carcaca");
+        var copia = medica_carcaca.cloneNode(true);
+
+        medida.appendChild(copia);
+    }
+
+    function mostrarMedida() {
+        var medida = document.getElementById("medidas");
+        var addMedida = document.getElementById("btn_criarMedida");
+
+        medida.style.display = "block";
+        addMedida.style.display = "block";
+
+        
+    }
+</script>
+

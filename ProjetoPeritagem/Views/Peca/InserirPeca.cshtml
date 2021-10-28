@@ -1,0 +1,313 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Inserir Peças";
+}
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Inserir Peça</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("CadastrarPeca","Peca")" method="post" enctype="multipart/form-data">
+
+            <div class="form-group col-md-12">
+                <label for="tipo_peca">Tipo Peça</label>
+                <select type="text" class="form-control" id="tipo_peca" name="ID_TipoPeca" onchange="alterarForm(this)">
+                    @{
+                        foreach (var tipo in Model.listTipoPeca)
+                        {
+                            <option value="@tipo.Id">@tipo.Id - @tipo.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control" id="descricao" name="Descricao" value="" required />
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="condicao">Condição</label>
+                    <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                        @{
+                            foreach (var dis in Model.listDisposicao)
+                            {
+                                <option value="@dis.ID_Disposicao">@dis.Nome</option>
+
+                            }
+                        }
+
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="material">Material</label>
+                    <select type="text" class="form-control" id="material" name="ID_Material">
+                        @{
+                            foreach (var mat in Model.listMaterial)
+                            {
+                                <option value="@mat.Id">@mat.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="altura">Altura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">h</span>
+                        <input type="text" class="form-control" id="altura" name="Altura" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="largura">Largura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="largura" name="Largura" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="furo">Furo</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">&#8709;</span>
+                        <input type="text" class="form-control" id="furo" name="Furo" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dureza">Dureza</label>
+                    <input type="text" class="form-control" id="dureza" name="Dureza" value="" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tratamento_termico">Trat. Térmico</label>
+                    <input type="text" class="form-control" id="tratamento_termico" name="TratamentoTermico" value="" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="peso">Peso</label>
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" id="peso" name="Peso" value="">
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">Kg</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="eixo">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="helicoildal">Helicoildal</label>
+                        <select type="text" class="form-control" id="helicoildal" name="Helicoidal">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="form-group col-md-6">
+                        <label for="sentido">Sentido</label>
+                        <select type="text" class="form-control" id="sentido" name="Sentido">
+                            <option value="direita">Direita</option>
+                            <option value="esquerda">Esquerda</option>
+                            <option value="bidirecional">Bidirecional</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="medidas_peca">
+                <div id="peca_dados">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="numDente">Número de Dentes</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">Z</span>
+                                <input type="text" class="form-control" id="numDentes" name="NumDentes" value="">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="externo">Externo</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">da</span>
+                                <input type="text" class="form-control" id="externo" name="Externo" value="">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="externo">Largura do Dente</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">da</span>
+                                <input type="text" class="form-control" id="externo" name="LarguraDente" value="">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="modulo">Modulo</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">Mn</span>
+                                <input type="text" class="form-control" id="modulo" name="Modulo" value="">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="angulo_pressao">Angulo. de Pressão</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">&#945;</span>
+                                <input type="text" class="form-control" id="angulo_pressao" name="AnguloPressao" value="">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">º</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="angulo_helice">Angulo Helice</label>
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">&#945;</span>
+                                <input type="text" class="form-control" id="angulo_helice" name="AnguloHelice" value="">
+                                <span class="input-group-text" id="addon-wrapping" style="width:50px">º</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="medida_w">Medida W</label>
+                        <textarea class="form-control" id="medida_w" name="Medida_W" rows="6"> </textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <p id="btn_clonar_medida" class="badge badge-success" onclick="clonarPecaDados()">Adicionar dados de Medida</p>
+            </div>
+
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                        <label for="desenho">Desenho</label>
+                        <input type="text" class="form-control" id="desenho" name="Desenho" value="">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                        <label for="ifile">Arquivo</label>
+                        <input multiple type="file" class="form-control-file" id="documento" name="Documento">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="par_conico">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="cone_externo">Valor K</label>
+                        <input type="text" class="form-control" name="ValorK" value="" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="metodo_fabricacao">Método de Fabricação</label>
+                        <select type="text" class="form-control" id="metodo_fabricacao" name="MetodoFabricacao">
+                            <option value="gleason">Gleason</option>
+                            <option value="klingelberg">Klingelberg</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="desenho">Desenho</label>
+                        <input type="text" class="form-control" id="desenho" name="Desenho" value="" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group col-md-12">
+                <label for="especial">Especial</label>
+                <input type="text" class="form-control" id="especial" name="Especial" value="" />
+            </div>
+
+            <div class="form-group">
+                <label for="descricao_retrabalho">Falhas Encontradas / Retrabalho</label>
+                <textarea class="form-control" id="descricao_ratrabalho" name="DescricaoRetrabalho" rows="6" value=""></textarea>
+            </div>
+
+            <div>
+                <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.peritagem.Id" />
+            </div>
+
+            <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+
+        </form>
+    </div>
+
+</div>
+<script src="~/js/ValidadorCampos.js">
+
+</script>
+
+<script>
+
+    function clonarValorW() {
+        var el = document.getElementById("div_valor_w");
+        var div = document.getElementById("div_valor_w_geral");
+        var clone = el.cloneNode(true);
+
+        div.appendChild(clone);
+    }
+
+    function clonarPecaDados() {
+        var el = document.getElementById("peca_dados");
+        var div = document.getElementById("medidas_peca");
+        var clone = el.cloneNode(true);
+
+        div.appendChild(clone);
+    }
+
+    function alterarForm(valor) {
+
+        var par_conico = document.getElementById("par_conico");
+        var par_cilindrico = document.getElementById("par_cilindrico");
+        var eixo = document.getElementById("eixo");
+
+        if (valor.value == 1 || valor.value == 2) {
+            par_conico.style.display = "block";
+            par_cilindrico.style.display = "none";
+            eixo.style.display = "block";
+
+        } else if (valor.value == 3 || valor.value == 4) {
+            par_conico.style.display = "none";
+            par_cilindrico.style.display = "block";
+            eixo.style.display = "block";
+
+        } else if (valor.value == 5 || valor.value == 6) {
+            par_conico.style.display = "none";
+            par_cilindrico.style.display = "none";
+            eixo.style.display = "block";
+
+        } else if (valor.value > 15) {
+            par_conico.style.display = "none";
+            par_cilindrico.style.display = "none";
+            eixo.style.display = "none";
+        }
+        else {
+            par_conico.style.display = "none";
+            par_cilindrico.style.display = "none";
+            eixo.style.display = "block";
+        }
+
+    }
+</script>

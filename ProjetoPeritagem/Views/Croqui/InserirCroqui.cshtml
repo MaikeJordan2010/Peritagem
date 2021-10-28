@@ -1,0 +1,23 @@
+﻿
+@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+
+@{
+    ViewData["Title"] = "InserirCroqui";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Inserir Croqui</h2>
+
+<form action="@Url.Action("CadastrarCroqui","Croqui")" method="post" enctype="multipart/form-data">
+    <input type="file" name="File" multiple />
+    <input type="hidden" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+    <input type="hidden" name="ID_Peca" value="@Model.ID_Peca" />
+    <input type="hidden" name="ID_Carcaca" value="@Model.ID_Carcaca" />
+
+
+    <input type="submit" value="Enviar" />
+</form>
+
+
+

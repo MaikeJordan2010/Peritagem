@@ -1,0 +1,76 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "ListarObjetos";
+}
+
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Informações do Equipamento</h2>
+<div id="main">
+    <div id="tabela">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th>Nome</th>
+                    <th>Tipo de Dados</th>
+                    <th>Fabricante</th>
+                    <th>Modelo</th>
+                    <th>Sentido</th>
+                    <th scope="col" class="btn_padrao">
+                        <a class="badge badge-primary" href="@Url.Action( "InserirRedutor", "Redutor", new { ID_Peritagem = Model.ID_Peritagem })">Incluir</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody style="max-height:500pc;overflow-y:scroll">
+                @{
+                    foreach (var it in Model.listRedutor)
+                    {
+                <tr>
+                    <td>@it.Id</td>
+                    <td>@it.Nome</td>
+                    <td>@it.TipoDados</td>
+                    <td>@it.Fabricante</td>
+                    <td>@it.Modelo</td>
+                    <td>@it.Sentido</td>
+
+                    <td class="btn_padrao" rowspan="3">
+                        <li class="btn_padrao_100"><a class="badge badge-warning" href="@Url.Action( "AlterarRedutor", "Redutor", new { ID_Peritagem = it.ID_Peritagem, ID_Redutor = it.Id })">Alterar</a></li>
+                        <li class="btn_padrao_100"><a class="badge badge-danger" href="@Url.Action( "ExcluirRedutor", "Redutor", new { ID_Peritagem = it.ID_Peritagem, ID_Redutor = it.Id })">Excluir</a></li>
+                        <li class="btn_padrao_100"><a class="badge badge-info" href="@Url.Action( "ListarImagem", "Imagem", new { ID_Peritagem = it.ID_Peritagem, ID_Redutor = it.Id })">Album</a></li>
+                    </td>
+                </tr>
+                        <tr>
+                            <td ><strong>Fabricação</strong></td>
+                            <td>@it.AnoFabricacao</td>
+                            <td ><strong>Cor</strong></td>
+                            <td>@it.Cor</td>
+                            <td ><strong>Peso</strong></td>
+                            <td>@it.Peso</td>
+                        </tr>
+                        <tr>
+                            <td ><strong>Rotação IN</strong></td>
+                            <td>@it.RotacaoIN</td>
+                            <td ><strong>Rotação OUT</strong></td>
+                            <td>@it.RotacaoOUT</td>
+                            <td ><strong>Potência</strong></td>
+                            <td>@it.Potencia</td>
+                        </tr>
+                        <tr class="lista_final_peritagem">
+                            <td ><strong>Aplicação</strong></td>
+                            <td colspan="2">@it.Aplicacao</td>
+                            <td ><strong>Descrição</strong></td>
+                            <td colspan="4">@it.Descricao</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+        <div>
+            <nav aria-label="Page navigation example">
+                
+            </nav>
+        </div>
+    </div>
+</div>
+

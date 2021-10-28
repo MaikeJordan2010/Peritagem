@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Portal Fornecedor</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />-->
+    <link rel="stylesheet" type="text/css" href="~/css/style-login.css" />
+
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    -->
+
+</head>
+
+<body id="paginaLogin">
+    @{
+        var msg = ViewData["msg"];
+    }
+    <div id="geral">
+        <div class="filter-body">
+            <div id="logo">
+                <img id="logo-img" src="~/images/logo-fresadora-santana.png" alt="Fresadora Santana" />
+            </div>
+           
+            <form id="form_esqueci_senha" action="@Url.Action("EnviarEmail","Login")" method="post">
+                <div class="login-box">
+                    <h2>Esqueçi minha Senha</h2>
+                    <div class="textbox">
+                        <i class="far fa-user"></i>
+                        <input type="text" placeholder="Email" name="Email" value="" required>
+                    </div>
+                    @{
+                        msg = ViewData["msg"];
+                        <p class="msgErro">@msg</p>
+                    }
+                    <input class="btn" type="submit" name="" value="Enviar">
+                    <p class="link_trocar_senha">@Html.ActionLink("Trocar Senha", "TrocarAcesso", "Login")</p>
+                    <P class="link_entrar">@Html.ActionLink("Entrar", "Index", "Login")</P>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

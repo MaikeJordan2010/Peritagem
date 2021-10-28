@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Portal Fornecedor</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />-->
+    <link rel="stylesheet" type="text/css" href="~/css/style-login.css" />
+
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    -->
+
+</head>
+
+<body id="paginaLogin">
+    @{
+        var msg = ViewData["msg"];
+        var email = ViewData["email"];
+    }
+    <div id="geral">
+        <div class="filter-body">
+            <div id="logo">
+                <img id="logo-img" src="~/images/logo-fresadora-santana.png" alt="Fresadora Santana" />
+            </div>
+            <form id="form_trocar_senha" action="@Url.Action("trocarAcesso","Login")" method="post">
+                <div class="login-box">
+                    <h2>Portal Fornecedor</h2>
+                    <div class="textbox">
+                        <i class="far fa-user"></i>
+                        <input type="text" placeholder="Email" name="email" value="@email" required>
+                    </div>
+
+                    <div class="textbox">
+                        <i class="fas fa-key"></i>
+                        <input type="password" placeholder="Senha Atual" name="senhaAtual" value="" required>
+                    </div>
+
+                    <div class="textbox">
+                        <i class="fas fa-key"></i>
+                        <input type="password" placeholder="Nova Senha" name="novaSenha" value="" required>
+                    </div>
+
+                    <div class="textbox">
+                        <i class="fas fa-key"></i>
+                        <input type="password" placeholder="Confirmar Senha" name="confirmarSenha" value="" required>
+                    </div>
+
+                    <input type="submit" class="btn" value="Enviar" />
+
+                    @{
+                        msg = ViewData["msg"];
+                        <p class="msgErro">@msg</p>
+                    }
+                    <p class="link_trocar_senha">@Html.ActionLink("Esqueçi Minha Senha", "EsqueciMinhaSenha", "Login")</p>
+                    <P class="link_entrar">@Html.ActionLink("Entrar", "Index", "Login")</P>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script src="~/js/pesquisar.js"></script>
+
+</body>
+</html>

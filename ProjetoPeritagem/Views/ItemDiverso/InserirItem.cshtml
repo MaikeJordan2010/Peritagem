@@ -1,0 +1,1449 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "InserirItem";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Inserir Items Diversos</h2>
+
+<div id="main">
+    <div id="formulario">
+        <div class="form-group col-md-12">
+            <label>Tipo Item</label>
+            <select type="text" class="form-control" onchange="mostrarForm(this)">
+                @{
+                    <option value="0">Não Informado</option>
+
+                    foreach (var t in Model.listTipoItem)
+                    {
+                        <option value="@t.Id">@t.Id - @t.Nome</option>
+                    }
+                }
+
+            </select>
+        </div>
+
+        <!------------------------------------- VISOR DE NIVEL -------------------------------------->
+
+
+        <div id="visor_nivel_geral">
+            <h2 id="titulo-form">Visor de Nível</h2>
+            <button onclick="addElemento('visor_nivel')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_visor_nivel">
+                    <div id="visor_nivel">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!------------------------------------- RESPIRO / GERAL -------------------------------------->
+
+
+        <div id="respiro_filtro_geral">
+            <h2 id="titulo-form">Respiro / Filtro de Ar</h2>
+            <button onclick="addElemento('respiro_filtro')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_respiro_filtro">
+                    <div id="respiro_filtro">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------BUJOES-------------------------------------->
+
+
+        <div id="bujoes_geral">
+            <h2 id="titulo-form">Bujões</h2>
+            <button onclick="addElemento('bujoes')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_bujoes">
+                    <div id="bujoes">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------ANEL ELASTICO -------------------------------------->
+
+
+        <div id="anel_elastico_geral">
+            <h2 id="titulo-form">Anel Elástico</h2>
+            <button onclick="addElemento('anel_elastico')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_anel_elastico">
+                    <div id="anel_elastico">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+
+        <!-------------------------------------ENGRAXADEIRA -------------------------------------->
+
+        <div id="engraxadeira_geral">
+            <h2 id="titulo-form">Engraxedeira</h2>
+            <button onclick="addElemento('engraxadeira')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_engraxadeira">
+                    <div id="engraxadeira">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+
+        <!-------------------------------------CONEXOES/SENSORES/VALVULAS-------------------------------------->
+
+
+        <div id="conexoes_sensores_valvulas_geral">
+            <h2 id="titulo-form">Conexões / Sensores / Válvulas (Itens de lubrificação)</h2>
+            <button onclick="addElemento('conexoes_sensores_valvulas')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_conexoes_sensores_valvulas">
+                    <div id="conexoes_sensores_valvulas">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" onkeypress="ValidarNumerosInteiro()" name="Quantidade" />
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------PARAFUSOS -------------------------------------->
+
+        <div id="parafuso_geral">
+            <h2 id="titulo-form">Parafusos</h2>
+            <button onclick="addElemento('parafuso')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_parafuso">
+                    <div id="parafuso">
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="passo">Passo</label>
+                                <input type="text" class="form-control" id="passo" name="Passo" />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="comprimento">Comprimento</label>
+                                <input type="text" class="form-control" id="comprimento" name="Comprimento" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="classe">Classe</label>
+                                <input type="text" class="form-control" id="classe" name="Classe" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="Ruela_de_pressao_din_12" style="font-size:12px;">Ruela de Pressão DIN-12</label>
+                                <select type="text" class="form-control" id="Ruela_de_pressao_din_12" name="Ruela_Pressao_Din12">
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------PORCAS -------------------------------------->
+
+        <div id="porca_geral">
+            <h2 id="titulo-form">Porcas</h2>
+            <button onclick="addElemento('porca')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_porca">
+                    <div id="porca">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="rosca">Rosca</label>
+                                <input type="text" class="form-control" id="rosca" name="Rosca" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="passo">Passo</label>
+                                <input type="text" class="form-control" id="passo" name="Passo" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="classe">Classe</label>
+                                <input type="text" class="form-control" id="classe" name="Classe" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+
+        <!-------------------------------------PINO GUIA -------------------------------------->
+
+        <div id="pino_guia_geral">
+            <h2 id="titulo-form">Pino Guia</h2>
+            <button onclick="addElemento('pino_guia')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_pino_guia">
+                    <div id="pino_guia">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------PINO ELASTICO -------------------------------------->
+
+        <div id="pino_elastico_geral">
+            <h2 id="titulo-form">Pino Elástico</h2>
+            <button onclick="addElemento('pino_elastico')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_pino_elastico">
+                    <div id="pino_elastico">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+
+        <!-------------------------------------ARRUELA LISA -------------------------------------->
+
+        <div id="arruela_lisa_geral">
+            <h2 id="titulo-form">Arruela Lisa</h2>
+            <button onclick="addElemento('arruela_lisa')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_arruela_lisa">
+                    <div id="arruela_lisa">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------ARRUELA DE PRESSÃO -------------------------------------->
+
+        <div id="arruela_pressao_geral">
+            <h2 id="titulo-form">Arruela de Pressão</h2>
+            <button onclick="addElemento('arruela_pressao')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_arruela_pressao">
+                    <div id="arruela_pressao">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="norma">Norma</label>
+                                <select type="text" class="form-control" id="norma" name="ID_Norma">
+                                    @{
+                                        foreach (var n in Model.listNorma)
+                                        {
+                                            <option value="@n.Id">@n.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+
+        <!-------------------------------------ROLAMENTO-------------------------------------->
+
+        <div id="rolamento_geral">
+            <h2 id="titulo-form">Rolamento</h2>
+            <button onclick="addElemento('rolamento')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_rolamento">
+                    <div id="rolamento">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="codigo">Código</label>
+                                <input type="text" class="form-control" id="codigo" name="Codigo" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="fabricante">Fabricante</label>
+                                <input type="text" class="form-control" id="fabricante" name="Fabricante" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="observacao">Observação</label>
+                                <input type="text" class="form-control" id="observacao" name="Observacao" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------RETENTORES DIN 3760 -------------------------------------->
+
+        <div id="retentores_din3760_geral">
+            <h2 id="titulo-form">Retentores DIN 3760</h2>
+            <button onclick="addElemento('retentores_din3760')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_retentores_din3760">
+                    <div id="retentores_din3760">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="labio">Labio A / AS</label>
+                                <input type="text" class="form-control" id="labio" name="Labio" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="borracha">Borracha = BN / FKM</label>
+                                <input type="text" class="form-control" id="borracha" name="Borracha" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="fabricante">Fabricante</label>
+                                <input type="text" class="form-control" id="fabricante" name="Fabricante" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------ELEMENTOS DE RETENÇÃO-------------------------------------->
+
+        <div id="elemento_redencao_geral">
+            <h2 id="titulo-form">Elementos de Vedação</h2>
+            <button onclick="addElemento('elemento_redencao')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_elemento_redencao">
+                    <div id="elemento_redencao">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="descricao">Descricao</label>
+                                <input type="text" class="form-control" id="descricao" name="Descricao" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="material">Material</label>
+                                <select type="text" class="form-control" id="material" name="ID_Material">
+                                    @{
+                                        foreach (var mat in Model.listMaterial)
+                                        {
+                                            <option value="@mat.Id">@mat.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!-------------------------------------CHAVETAS -------------------------------------->
+
+        <div id="chaveta_geral">
+            <h2 id="titulo-form">Chavetas</h2>
+            <button onclick="addElemento('chaveta')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_chaveta">
+                    <div id="chaveta">
+                        <div class="form-row">
+                            <div class="form-group col-md-1">
+                                <label for="quantidade">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidade" name="Quantidade" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="l1">L1</label>
+                                <input type="text" class="form-control" id="l1" name="L1" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="l2">L2</label>
+                                <input type="text" class="form-control" id="l2" name="L2" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="l3">L3</label>
+                                <input type="text" class="form-control" id="l3" name="L3" onkeypress="ValidarNumerosInteiro()" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem" />
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!------------------------------------- CONTRA RECUO -------------------------------------->
+
+        <div id="contra_recuo_geral">
+            <h2 id="titulo-form">Contra Recuo</h2>
+            <button onclick="addElemento('contra_recuo')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_contra_recuo">
+                    <div id="contra_recuo">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="marca">Marca</label>
+                                <input type="text" class="form-control" id="Marca" name="Marca" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="descricao">Descrição</label>
+                                <textarea class="form-control" id="descricao" name="Descricao"></textarea>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!------------------------------------- HELICE -------------------------------------->
+
+        <div id="helice_geral">
+            <h2 id="titulo-form">Hélice</h2>
+            <button onclick="addElemento('helice')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_helice">
+                    <div id="helice">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="marca">Marca</label>
+                                <input type="text" class="form-control" id="Marca" name="Marca" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="descricao">Descrição</label>
+                                <textarea class="form-control" id="descricao" name="Descricao"></textarea>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+        <!------------------------------------- ACOPLAMENTO -------------------------------------->
+
+        <div id="acoplamento_geral">
+            <h2 id="titulo-form">Acoplamento</h2>
+            <button onclick="addElemento('acoplamento')">+</button>
+            <form action="@Url.Action("CadastrarItem","ItemDiverso")" method="post">
+                <div id="form_acoplamento">
+                    <div id="acoplamento">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="condicao">Condição</label>
+                                <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                                    @{
+                                        foreach (var d in Model.listDisposicao)
+                                        {
+                                            <option value="@d.ID_Disposicao">@d.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="marca">Marca</label>
+                                <input type="text" class="form-control" id="Marca" name="Marca" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" name="Modelo" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dimensao">Dimensão</label>
+                                <input type="text" class="form-control" id="dimensao" name="Dimensao" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="local_aplicado">Local Aplicado</label>
+                                <input type="text" class="form-control" id="local_aplicado" name="Local_Aplicado" />
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="descricao">Descrição</label>
+                                <textarea class="form-control" id="descricao" name="Descricao"></textarea>
+                            </div>
+                        </div>
+                        <input class="tipo_item" type="hidden" value="" name="Tipo_Item" />
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                </div>
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+            </form>
+        </div>
+
+    </div>
+</div>
+<script src="~/js/ValidadorCampos.js"></script>
+
+<script>
+    function addElemento(nome) {
+        var el = document.getElementById(nome);
+        var clone = el.cloneNode(true);
+        var form = document.getElementById("form_" + nome);
+        form.appendChild(clone);
+    }
+
+    function mostrarForm(el) {
+        var visor = document.getElementById("visor_nivel_geral");
+        var bujoes = document.getElementById("bujoes_geral");
+        var anel_elastico = document.getElementById("anel_elastico_geral");
+        var engraxadeira = document.getElementById("engraxadeira_geral");
+        var conexoes_sensores_valvulas = document.getElementById("conexoes_sensores_valvulas_geral");
+        var parafuso = document.getElementById("parafuso_geral");
+        var porca = document.getElementById("porca_geral");
+        var pino_guia = document.getElementById("pino_guia_geral");
+        var pino_elastico = document.getElementById("pino_elastico_geral");
+        var arruela_lisa = document.getElementById("arruela_lisa_geral");
+        var arruela_pressao = document.getElementById("arruela_pressao_geral");
+        var retentores_din3760 = document.getElementById("retentores_din3760_geral");
+        var rolamento = document.getElementById("rolamento_geral");
+        var elemento_redencao = document.getElementById("elemento_redencao_geral");
+        var chaveta = document.getElementById("chaveta_geral");
+        var contra_recuo = document.getElementById("contra_recuo_geral");
+        var helice = document.getElementById("helice_geral");
+        var acoplamento = document.getElementById("acoplamento_geral");
+        var respiro = document.getElementById("respiro_filtro_geral");
+
+        let tipo_item = document.getElementsByClassName("tipo_item");
+        tipo_item.value = el.value;
+
+        for (var i = 0; i < tipo_item.length; i++) {
+            tipo_item[i].value = el.value;
+        }
+
+
+        if (el.value == 7) {
+            bujoes.style.display = 'none';
+            visor.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 8) {
+            visor.style.display = 'block';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 9) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'block';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 10) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'block';
+        }
+        else if (el.value == 11) {
+            tampa.style.display = 'none';
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'block';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 12) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'block';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 13) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'block';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 14) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'block';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 15) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'block';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 16) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'block';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 17) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'block';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 18) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'block';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 19) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'block';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 20) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'block';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 21) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'block';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 22) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'block';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 23) {
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'block';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 24) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'block';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 25) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'block';
+            acoplamento.style.display = 'none';
+            respiro.style.display = 'none';
+        }
+        else if (el.value == 26) {
+            visor.style.display = 'none';
+            bujoes.style.display = 'none';
+            anel_elastico.style.display = 'none';
+            engraxadeira.style.display = 'none';
+            conexoes_sensores_valvulas.style.display = 'none';
+            parafuso.style.display = 'none';
+            porca.style.display = 'none';
+            pino_guia.style.display = 'none';
+            pino_elastico.style.display = 'none';
+            arruela_lisa.style.display = 'none';
+            arruela_pressao.style.display = 'none';
+            retentores_din3760.style.display = 'none';
+            rolamento.style.display = 'none';
+            elemento_redencao.style.display = 'none';
+            chaveta.style.display = 'none';
+            contra_recuo.style.display = 'none';
+            helice.style.display = 'none';
+            acoplamento.style.display = 'block';
+            respiro.style.display = 'none';
+        }
+    }
+</script>

@@ -1,0 +1,63 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+
+    <partial name="_SubMenu" />
+
+    <h2 id="titulo-form">Listar Acionamento</h2>
+    <!-----------------------------------------------Acionamento ----------------------------------------->
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr class="tabela_visualizar_titulo_item">
+                <th scope="col">ID</th>
+                <th scope="col">Fabricante</th>
+                <th scope="col">Potencia</th>
+                <th scope="col">Rotação</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Acionamento</th>
+                <th scope="col">Teste</th>
+                <th scope="col">Tipo Teste</th>
+                <th scope="col">Condição</th>
+                <th scope="col">
+                    <a class="badge badge-primary" href="@Url.Action( "InserirAcionamento", "Acionamento", new { ID_Peritagem = Model.ID_Peritagem })">Inserir</a><br />
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model.acionamento != null)
+                {
+                    <tr>
+                        <td>@Model.acionamento.Id</td>
+                        <td>@Model.acionamento.Fabricante</td>
+                        <td>@Model.acionamento.Potencia</td>
+                        <td>@Model.acionamento.RotacaoPolos</td>
+                        <td>@Model.acionamento.Modelo</td>
+                        <td>@Model.acionamento.TipoAcionamento</td>
+                        @{
+                            if (Model.acionamento.Teste)
+                            {
+                                <td><p>Sim</p></td>
+                                <td>@Model.acionamento.TipoTeste</td>
+                            }
+                            else
+                            {
+                                <td><p>Não</p></td>
+                                <td><p>Não</p></td>
+                            }
+                        }
+                        <td>@Model.acionamento.Disposicao.Nome</td>
+                        <td>
+                            <li class="btn_padrao_50"><a class="badge badge-warning" href="@Url.Action("AlterarAcionamento", "Acionamento", new { ID_Acionamento = Model.acionamento.Id, ID_Peritagem = Model.acionamento.ID_Peritagem })">Alterar</a></li><br />
+                            <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action("ExcluirAcionamento", "Acionamento", new { ID_Acionamento = Model.acionamento.Id, ID_Peritagem = Model.acionamento.ID_Peritagem })">Excluir</a></li><br />
+                            <li class="btn_padrao_50"><a class="badge badge-info" href="@Url.Action("ListarImagem", "Imagem", new { ID_Peritagem = Model.acionamento.ID_Peritagem, ID_Acionamento = Model.acionamento.Id })">Album</a><br /></li>
+
+                        </td>
+                    </tr>
+                    <tr class="lista_final_peritagem">
+                        <td colspan="1"><strong>Descrição</strong></td>
+                        <td colspan="10">@Model.acionamento.Descricao</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+

@@ -1,0 +1,432 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Alterar Peça";
+}
+
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Alterar Peça</h2>
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("GravarAlteracao","Peca")" method="post" enctype="multipart/form-data">
+
+            <div class="form-row">
+                <label for="tipo_peca">Tipo Peça</label>
+                <select type="text" class="form-control" id="tipo_peca" name="ID_TipoPeca" disabled>
+                    @{
+                        foreach (var tipo in Model.listTipoPeca)
+                        {
+                            if (tipo.Id == Model.peca.TipoPeca.Id)
+                            {
+                                <option selected value="@tipo.Id">@tipo.Id - @tipo.Nome</option>
+                            }
+                            else
+                            {
+                                <option value="@tipo.Id">@tipo.Id - @tipo.Nome</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control" id="descricao" name="Descricao" value="@Model.peca.Descricao">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="condicao">Condição</label>
+                    <select type="text" class="form-control" id="condicao" name="ID_Disposicao">
+                        @{
+                            foreach (var dis in Model.listDisposicao)
+                            {
+                                if (dis.ID_Disposicao == Model.peca.Disposicao.ID_Disposicao)
+                                {
+                                    <option selected value="@dis.ID_Disposicao">@dis.Nome</option>
+                                }
+                                else
+                                {
+                                    <option value="@dis.ID_Disposicao">@dis.Nome</option>
+                                }
+                            }
+                        }
+
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="material">Material</label>
+                    <select type="text" class="form-control" id="material" name="ID_Material">
+                        @{
+                            foreach (var mat in Model.listMaterial)
+                            {
+                                <option value="@mat.Id">@mat.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="altura">Altura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">h</span>
+                        <input type="text" class="form-control" id="altura" name="Altura" value="@Model.peca.Altura" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="largura">Largura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="largura" name="Largura" value="@Model.peca.Largura" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="furo">Furo</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">&#8709;</span>
+                        <input type="text" class="form-control" id="furo" name="Furo" value="@Model.peca.Furo" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dureza">Dureza</label>
+                    <input type="text" class="form-control" id="dureza" name="Dureza" value="@Model.peca.Dureza">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="tratamento_termico">Trat. Térmico</label>
+                    <input type="text" class="form-control" id="tratamento_termico" name="TratamentoTermico" value="@Model.peca.TratamentoTermico">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="peso">Peso</label>
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" id="peso" name="Peso" value="@Model.peca.Peso">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">Kg</span>
+                    </div>
+                </div>
+
+            </div>
+
+            @{
+                if (Model.peca.TipoPeca.Id < 16)
+                {
+                    <div id="Eixo">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <label for="helicoildal">Helicoildal</label>
+                                <select type="text" class="form-control" id="helicoildal" name="Helicoidal">
+                                    @{
+                                        if (Model.peca.Helicoidal)
+                                        {
+                                            <option selected value="true">Sim</option>
+                                            <option value="false">Não</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="true">Sim</option>
+                                            <option selected value="false">Não</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="sentido">Sentido</label>
+                                <select type="text" class="form-control" id="sentido" name="Sentido">
+                                    <option value="@Model.peca.Sentido">@Model.peca.Sentido</option>
+                                    <option value="direita">Direita</option>
+                                    <option value="esquerda">Esquerda</option>
+                                    <option value="bidirecional">Bidirecional</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+            @{
+                if (Model.peca.TipoPeca.Id < 3)
+                {
+                    <div id="par_conico">
+                        <div class="form-row">
+
+                            <div class="form-group col-md-4">
+                                <label for="valor_k">Valor K</label>
+                                <input type="text" class="form-control" id="valor_k" name="ValorK" value="@Model.peca.ValorK">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="metodo_fabricacao">Método de Fabricação</label>
+                                <select type="text" class="form-control" id="metodo_fabricacao" name="MetodoFabricacao">
+                                    @{
+                                        if (Model.peca.MetodoFabricacao == "gleason")
+                                        {
+                                            <option selected value="gleason">Gleason</option>
+                                            <option value="klingelberg">Klingelberg</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="gleason">Gleason</option>
+                                            <option selected value="klingelberg">Klingelberg</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="desenho">Desenho</label>
+                                <input type="text" class="form-control" id="desenho" name="Desenho" value="@Model.peca.Desenho" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+
+            <div>
+                @{
+                    foreach (var d in Model.peca.DadosPeca)
+                    {
+                    <div style="border-bottom:2px solid #c7c7c7">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="numDente">Número de Dentes</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">Z</span>
+                                    <input type="text" class="form-control" id="numDentes" name="NumDentes" value="@d.NumDentes">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="externo">Externo</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">da</span>
+                                    <input type="text" class="form-control" id="externo" name="Externo" value="@d.Externo">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="externo">Largura do Dente</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">da</span>
+                                    <input type="text" class="form-control" id="externo" name="LarguraDente" value="@d.LarguraDente">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="modulo">Modulo</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">Mn</span>
+                                    <input type="text" class="form-control" id="modulo" name="Modulo" value="@d.Modulo">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="angulo_pressao">Angulo. de Pressão</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">&#945;</span>
+                                    <input type="text" class="form-control" id="angulo_pressao" name="AnguloPressao" value="@d.AnguloPressao">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">º</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="angulo_helice">Angulo Helice</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">&#945;</span>
+                                    <input type="text" class="form-control" id="angulo_helice" name="AnguloHelice" value="@d.AnguloHelice">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">º</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="medida_w">Medida W</label>
+                            <textarea class="form-control" id="medida_w" name="Medida_W" rows="6">@d.Medida_W</textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" class="form-control" name="ID_Peca_Dados" value="@d.Id">
+                    }
+                    }
+                </div>
+
+            <div>
+                <div id="medidas_peca" style="display:none">
+                    <div id="peca_dados">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="numDente">Número de Dentes</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">Z</span>
+                                    <input type="text" class="form-control" id="numDentes" name="NumDentes" value="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="externo">Externo</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">da</span>
+                                    <input type="text" class="form-control" id="externo" name="Externo" value="">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px;">mm</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="externo">Largura do Dente</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px">da</span>
+                                    <input type="text" class="form-control" id="externo" name="LarguraDente" value="">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px;">mm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="modulo">Modulo</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">Mn</span>
+                                    <input type="text" class="form-control" id="modulo" name="Modulo" value="">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px;">mm</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="angulo_pressao">Angulo. de Pressão</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">&#945;</span>
+                                    <input type="text" class="form-control" id="angulo_pressao" name="AnguloPressao" value="">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:40px;text-align:center">º</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="angulo_helice">Angulo Helice</label>
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px">&#945;</span>
+                                    <input type="text" class="form-control" id="angulo_helice" name="AnguloHelice" value="">
+                                    <span class="input-group-text" id="addon-wrapping" style="width:50px;text-align:center">º</span>
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="ID_Peca_Dados" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="medida_w">Medida W</label>
+                            <textarea class="form-control" id="medida_w" name="Medida_W" rows="6"> </textarea>
+                        </div>
+                    </div>
+                </div>
+                <p id="btn_clonar_medida" style="display:none" class="badge badge-success" onclick="clonarPecaDados()">Adicionar dados de Medida</p>
+            </div>
+            <div class="form-row">
+                <div id="btn_mostrar_dados">
+                    <p  class="badge badge-info"  onclick="adicionarPecaDados()">Mostrar dados da Medida</p>
+                </div>
+            </div>
+
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
+                            <label for="desenho">Desenho</label>
+                            <input type="text" class="form-control" id="desenho" name="Desenho" value="@Model.peca.Desenho">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="documento">Arquivo</label>
+                            <input type="file" class="form-control" id="documento" name="Documento" multiple>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
+                            <label for="documento">Lista de Arquivos</label>
+
+                            <table class="table table-striped">
+
+                                <tbody>
+                                    @{
+                                        foreach (var d in Model.peca.ListDocumentos)
+                                        {
+                                            <tr>
+                                                <td>@d.Nome</td>
+                                                <td>
+                                                    <a target="_blank" href="../@d.Caminho"><img src="~/images/clips.png" style="width:15px" /> Abrir <br /></a>
+                                                </td>
+                                                <td>
+                                                    <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action( "ExcluirDocumento", "Peca", new { ID_Peritagem = Model.ID_Peritagem, ID_Peca = Model.peca.Id, ID = d.Id })">Excluir</a></li>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group col-md-12">
+                    <label for="especial">Especial</label>
+                    <input type="text" class="form-control" id="especial" name="Especial" value="@Model.peca.Especial">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="descricao_retrabalho">Falhas Encontradas / Retrabalho</label>
+                    <textarea class="form-control" id="descricao_ratrabalho" name="DescricaoRetrabalho" rows="6">@Model.peca.DescricaoRetrabalho</textarea>
+                </div>
+
+
+                <div>
+                    <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" value="@Model.ID_Peritagem">
+                    <input type="hidden" class="form-control" id="ID_Peca" name="ID_Peca" value="@Model.peca.Id">
+                </div>
+
+
+
+
+                <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+
+        </form>
+    </div>
+</div>
+
+<script>
+    function adicionarPecaDados() {
+        var p = document.getElementById("medidas_peca");
+        var b = document.getElementById("btn_mostrar_dados");
+        var c = document.getElementById("btn_clonar_medida");
+
+        p.style.display = "block";
+        b.style.display = "none";
+        c.style.display = "block";
+    }
+
+
+    function clonarPecaDados() {
+        var el = document.getElementById("peca_dados");
+        var div = document.getElementById("medidas_peca");
+        var clone = el.cloneNode(true);
+
+        div.appendChild(clone);
+    }
+</script>

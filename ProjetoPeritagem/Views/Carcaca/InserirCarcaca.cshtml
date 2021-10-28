@@ -1,0 +1,134 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Carcaca";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Inserir Carcaça</h2>
+<div id="main">
+    <div id="formulario">
+        <button onclick="adcionarMedida()">+</button>
+
+        <form action="@Url.Action("CadastrarCarcaca","Carcaca")" method="post">
+
+            <div id="medidas">
+                <div class="form-row" id="medidas_carcaca">
+                    <div class="form-group col-md-1">
+                        <label for="posicao">Posição</label>
+                        <input type="text" class="form-control" id="posicao" name="Posicao" value="" onkeypress="ValidarNumerosInteiro()" required />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="medicao">Medição</label>
+                        <input type="text" class="form-control" id="medicao" name="Medicao" value="" required />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="tolerancia">Tolerância</label>
+                        <input type="text" class="form-control" id="tolerancia" name="Tolerancia" value="" required />
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label for="descricaoMedida">Descrição da Medida</label>
+                        <input type="text" class="form-control" id="descricaoMedida" name="DescricaoMedida" value="" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="Nome" value="">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="altura">Altura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">h</span>
+                        <input type="text" class="form-control" id="altura" name="Altura" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="largura">Largura</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="largura" name="Largura" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="comprimento">Comprimento</label>
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">b</span>
+                        <input type="text" class="form-control" id="comprimento" name="Comprimento" value="" />
+                        <span class="input-group-text" id="addon-wrapping" style="width:50px">mm</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="peso">Peso</label>
+                    <div class="input-group flex-nowrap">
+                        <input type="text" class="form-control" id="peso" name="Peso" value="">
+                        <span class="input-group-text" id="addon-wrapping" style="width:40px">Kg</span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label for="condicao">Condição</label>
+                        <select type="text" class="form-control" id="Condicao" name="ID_Disposicao">
+                            @{
+                                foreach (var it in Model.listDisposicao)
+                                {
+
+                                    <option value="@it.ID_Disposicao"> @it.Nome </option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="form-group col-md-12">
+                        <label for="jateamento">Jateamento</label>
+                        <select type="text" class="form-control" id="jateamento" name="Jateamento">
+                            <option value="true">Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">descricao</label>
+                <textarea class="form-control" id="descricao" name="Descricao" rows="6"></textarea>
+            </div>
+
+
+            <input type="hidden" class="form-control" id="id_peritagem" name="ID_Peritagem" value="@Model.peritagem.Id">
+
+
+            <input type="submit" class="btn btn-primary mb-2" value="Enviar" />
+        </form>
+
+    </div>
+</div>
+<script  src="~/js/ValidadorCampos.js"></script>
+<script>
+    function adcionarMedida() {
+
+        var medida = document.getElementById("medidas");
+        var medica_carcaca = document.getElementById("medidas_carcaca");
+        var copia = medica_carcaca.cloneNode(true);
+
+        medida.appendChild(copia);
+    }
+</script>
+

@@ -1,0 +1,62 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "ListarConfiguracao";
+}
+
+<h2 id="titulo-form">Listar Classe</h2>
+
+<div id="main">
+    <div id="tabela-cliente">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Protocolo</th>
+                    <th scope="col">Domínio</th>
+                    <th scope="col">Porta</th>
+                    <th scope="col">Padrão</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">
+                        <a class="badge badge-primary" href="@Url.Action( "Index", "Configuracao")">Incluir</a>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var conf in Model.listConfiguracao)
+                    {
+                        <tr>
+                            <th scope="row">@conf.Id</th>
+                            <td>@conf.Nome</td>
+                            <td>@conf.Protocolo</td>
+                            <td>@conf.Dominio</td>
+                            <td>@conf.Porta</td>
+                            <td>
+                                @{ 
+                                    if (conf.Padrao)
+                                    {
+                                        <p>Sim</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Não</p>
+                                    }
+                                }
+                            </td>
+                            <td>@conf.Descricao</td>
+                            <td>
+                                <a class="badge badge-warning" href="@Url.Action( "AlterarConfiguracao", "Configuracao", new { ID_Configuracao = conf.Id})">Alterar</a><br />
+                                <a class="badge badge-danger" href="@Url.Action( "ExcluirClasse", "Configuracao", new { ID_Configuracao = conf.Id })">Excluir</a><br />
+                                <a class="badge badge-info" href="@Url.Action( "GravarPadrao", "Configuracao", new { ID_Configuracao = conf.Id })">Padrão</a><br />
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

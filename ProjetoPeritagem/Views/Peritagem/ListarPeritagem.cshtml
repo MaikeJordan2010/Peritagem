@@ -1,0 +1,193 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Listar Peritagem";
+}
+
+<div id="div-pesquisa">
+    <input type="checkbox" id="checkbox-pesquisa" />
+
+    <form id="form-pesquisa-listar" action="@Url.Action("ListarPeritagem","Peritagem")" method="Get">
+        <div class="form-group col-md-2">
+            <label for="cliente">Cliente</label>
+            <select type="text" class="form-control" id="cliente" name="ID_Cliente">
+                <option value="0">Todas</option>
+
+                @{
+                    foreach (var it in Model.listCliente)
+                    {
+                        <option value="@it.Id">@it.Nome</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="numNota">Nº Nota</label>
+            <input type="text" class="form-control" id="numNota" name="NFE" onkeypress="ValidarNumerosInteiro()" />
+        </div>
+
+
+        <div class="form-group col-md-2">
+            <label for="NomeEquipamento">Nome do Equipamento</label>
+            <input type="text" class="form-control" id="NomeEquipamento" name="NomeEquipamento" />
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="situacao">Situação</label>
+            <select type="text" class="form-control" id="id_situacao" name="ID_Situacao">
+                @{
+                    foreach (var it in Model.listSituacao)
+                    {
+                        <option value="@it.Id">@it.Descricao</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input type="submit" value="Enviar" class="btn btn-primary mb-1" style="margin-top:30px" />
+        </div>
+    </form>
+    <div id="btn-pesquisa">
+        <label for="checkbox-pesquisa">
+            <img src="~/images/pesquisa.png" style="width:40px;height:40px; float:left" />
+        </label>
+    </div>
+</div>
+
+
+
+<div style="width:98%">
+    <h2 id="titulo-form">Listar Peritagem</h2>
+</div>
+<div id="main">
+    <div id="tabela">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Descricao</th>
+                    <th scope="col">Nfe</th>
+                    <th scope="col">Cadastro</th>
+                    <th scope="col">Contrato</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col" style="width:170px">Anexo</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody data-spy="scroll">
+                @{
+                    foreach (var it in Model.listPeritagem)
+                    {
+                        <tr>
+                            <td scope="row">@it.Id</td>
+                            <td><img src="../@it.Cliente.Icone" style="width:30px;" /><br /> @it.Cliente.Nome</td>
+                            <td>@it.Descricao</td>
+                            <td>@it.Nfe</td>
+                            <td>@it.UsuarioCriador.Nome <br /> @it.Dt_Cadastro</td>
+                            <td>@it.NumeroContrato</td>
+                            <td rowspan="2">@it.Situacao.Descricao</td>
+                            @{
+
+                                <td>
+                                    @{
+                                        foreach (var doc in it.ListDoc)
+                                        {
+                                            <a target="_blank" href="../@doc.Caminho"><img src="~/images/clips.png" style="width:15px" /> @doc.Nome  <br /></a>
+                                        }
+                                    }
+                                </td>
+                            }
+                            <td class="btn_padrao" rowspan="2">
+                                <li class="btn_padrao_50"><a class="badge badge-primary" href="@Url.Action( "ListarRedutor", "Redutor", new { ID_Peritagem = it.Id })">Redutor</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-dark" href="@Url.Action( "Visualizar", "Peritagem", new { ID_Peritagem = it.Id })">Abrir</a><br /></li>
+                                <li class="btn_padrao_100"><a class="badge badge-info" href="@Url.Action( "ListarAcionamento", "Acionamento", new { ID_Peritagem = it.Id })">Acionamento</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-primary" href="@Url.Action( "ListarCarcaca", "Carcaca", new { ID_Peritagem = it.Id })">Carcaça</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-success" href="@Url.Action( "ListarPeca", "Peca", new { ID_Peritagem = it.Id })">Peca</a></li>
+                                <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action( "ExcluirPeritagem", "Peritagem", new { ID_Peritagem = it.Id })">Excluir</a></li>
+                                <li class="btn_padrao_50"><a class="badge badge-warning" href="@Url.Action( "AlterarPeritagem", "Peritagem", new { ID_Peritagem = it.Id })">Alterar</a></li>
+                                <li class="btn_padrao_50"><a class="badge badge-info" href="@Url.Action( "ListarImagem", "Imagem", new { ID_Peritagem = it.Id })">Album</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-secondary" href="@Url.Action( "ListarItem", "ItemDiverso", new { ID_Peritagem = it.Id })">Items</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-light" href="@Url.Action( "PeritagemPDF", "Peritagem", new { ID_Peritagem = it.Id })" target="_blank">PDF</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-dark" href="#" onclick="mostrarSituacao('@it.Id', '@it.Nome')">Situacao</a><br /></li>
+
+                            </td>
+                        </tr>
+                        <tr class="lista_final_peritagem">
+                            <td><strong>Ref.</strong></td>
+                            <td class="font_text" colspan="3">@it.Referencia</td>
+                            <td><strong>Motivo.</strong></td>
+                            <td class="font_text" colspan="3">@it.MotivoManutencao</td>
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+        <div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @{
+                        for (var i = 1; i < Model.pages; i++)
+                        {
+                            <li class="page-item"><a class="page-link" href="@Url.Action( "ListarPeritagem", "Peritagem", new { page = i })">@i</a></li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<div id="main_albun_tela_cheia">
+    <div id="mudarSituacao">
+        <h4 id="titulo-form">Alterar Situação</h4>
+
+        <form  action="@Url.Action("AlterarSituacao","Peritagem")" method="Get">
+            <div class="form-group col-md-12">
+                <label for="numNota">Nome / ID</label>
+                <input type="text" class="form-control" id="Nome_Peritagem" name="Nome_Peritagem" disabled />
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="situacao">Situação</label>
+                <select type="text" class="form-control" id="id_situacao" name="ID_Situacao">
+                    @{
+                        foreach (var it in Model.listSituacao)
+                        {
+                            <option value="@it.Id">@it.Descricao</option>
+                        }
+                    }
+                </select>
+            </div>
+            <input type="hidden" class="form-control" id="ID_Peritagem" name="ID_Peritagem" />
+
+            <div class="form-group col-md-12">
+                <input type="submit" value="Enviar" class="btn btn-primary mb-12" style="margin-top:30px; width:100%" />
+            </div>
+
+        </form>
+    </div>
+    <li><a href="#"><h4 id="titulo-form" style="color:#fff" onclick="fecharSituacao()">Sair</h4></a></li>
+
+</div>
+
+<script>
+    function mostrarSituacao(ID, Nome) {
+        var tela = document.getElementById("main_albun_tela_cheia");
+        var id = document.getElementById("ID_Peritagem");
+        var nome = document.getElementById("Nome_Peritagem");
+        tela.style.display = "block";
+
+        id.value = ID;
+        nome.value = Nome + " / " + ID;
+    }
+
+    function fecharSituacao() {
+        var tela = document.getElementById("main_albun_tela_cheia");
+        tela.style.display = "none";
+    }
+</script>

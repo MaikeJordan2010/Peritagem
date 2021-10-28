@@ -1,0 +1,53 @@
+﻿@{
+
+  Layout = null;
+
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Peritagem</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/reset.css" />-->
+    <link rel="stylesheet" type="text/css" href="~/css/style-login.css" />
+
+</head>
+
+<body id="paginaLogin">
+
+    <div id="geral">
+        <div class="filter-body">
+            <div id="logo">
+                <img id="logo-img" src="~/images/logo-fresadora-santana.png" alt="Fresadora Santana" />
+            </div>
+            <form id="form_login" action="@Url.Action("Logar","Login")" method="post">
+                <div class="login-box">
+                    <h2>Sistema de Peritagem</h2>
+                    <div class="textbox">
+                        <i class="far fa-user"></i>
+                        <input type="text" placeholder="Email" name="email" value="">
+                    </div>
+
+                    <div class="textbox">
+                        <i class="fas fa-key"></i>
+                        <input type="password" placeholder="Senha" name="senha" value="">
+                    </div>
+
+                    <input class="btn" type="submit" name="" value="Entrar">
+                    @{
+                        var msg = ViewData["msg"];
+                        <p class="msgErro">@msg</p>
+                    }
+                    <p class="link_trocar_senha">@Html.ActionLink("Esqueçi Minha Senha", "EsqueciMinhaSenha", "Login")</p>
+                    <P class="link_entrar">@Html.ActionLink("Trocar Senha", "TrocarAcesso", "Login")</P>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/js/pesquisar.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "AlterarPeritagem";
+}
+
+
+
+<partial name="_SubMenu" />
+<h2 id="titulo-form">Alterar Peritagem</h2>
+
+<div id="main">
+    <div id="formulario">
+        <form action="@Url.Action("GravarAlteracao","Peritagem")" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="descricao">Descricao do Equipamento</label>
+                    <input type="text" class="form-control" id="descricao" name="Descricao" value="@Model.peritagem.Descricao">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_peritagem">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" value="@Model.peritagem.Id" disabled>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" class="form-control" id="Cliente" name="ClienteNome" value="@Model.peritagem.Cliente.Nome" disabled>
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="numNota">Nº Nota</label>
+                    <input type="text" class="form-control" id="numNota" name="NumeroNota" value="@Model.peritagem.Nfe" disabled />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="numNota">Responsável</label>
+                    <input type="text" class="form-control" id="responsavel" name="Responsavel" value="@Model.peritagem.UsuarioCriador.Nome" disabled />
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="numOrcamento">Orçamento</label>
+                    <input type="text" class="form-control" id="numOrcamento" name="NumeroOrcamento" value="@Model.peritagem.ID_Orcamento" />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cliente">Protocolo</label>
+                    <input type="text" class="form-control" id="protocolo" name="Protocolo" value="@Model.peritagem.Protocolo">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="numContrato">Nº Contrato</label>
+                    <input type="text" class="form-control" id="numContrato" name="NumeroContrato" value="@Model.peritagem.NumeroContrato" />
+                </div>
+
+            </div>
+
+            @{
+                var dt = Model.peritagem.Dt_Chegada.ToString().Split(" ")[0];
+                var dt_chegada = dt.Split("/")[2] + "-" + dt.Split("/")[1] + "-" + dt.Split("/")[0];
+                dt = Model.peritagem.Dt_Inicio.ToString().Split(" ")[0];
+                var dt_inicio = dt.Split("/")[2] + "-" + dt.Split("/")[1] + "-" + dt.Split("/")[0];
+                dt = Model.peritagem.Dt_Previsao.ToString().Split(" ")[0];
+                var dt_previsao = dt.Split("/")[2] + "-" + dt.Split("/")[1] + "-" + dt.Split("/")[0];
+                dt = Model.peritagem.Dt_Revisao.ToString().Split(" ")[0];
+                var dt_revisao = dt.Split("/")[2] + "-" + dt.Split("/")[1] + "-" + dt.Split("/")[0];
+                dt = Model.peritagem.Dt_Finalizacao.ToString().Split(" ")[0];
+                var dt_finalizacao = dt.Split("/")[2] + "-" + dt.Split("/")[1] + "-" + dt.Split("/")[0];
+
+            }
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dt_chegada">Data Cadastro</label>
+                    <input type="text" class="form-control" id="dt_cadastro" name="DT_Cadastro" value="@Model.peritagem.Dt_Cadastro" disabled />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_chegada">Data Chegada</label>
+                    <input type="date" class="form-control" id="dt_chegada" name="DT_Chegada" value="@dt_chegada" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_entrada">Data Inicio</label>
+                    <input type="date" class="form-control" id="dt_inicio" name="DT_Inicio" value="@dt_inicio" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="dt_previsao">Data Previsão</label>
+                    <input type="date" class="form-control" id="dt_previsao" name="DT_Previsao" value="@dt_previsao" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_revisao">Data Revisao</label>
+                    <input type="date" class="form-control" id="dt_revisao" name="DT_Revisao" value="@dt_revisao" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dt_finalizacao"> Data Finalização</label>
+                    <input type="date" class="form-control" id="dt_finalizacao" name="DT_Finalizacao" value="@dt_finalizacao" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="referencia">Referência</label>
+                <textarea class="form-control" id="referencia" name="Referencia" onchange="" rows="3">@Model.peritagem.Referencia</textarea>
+            </div>
+            <div class="form-group">
+                <label for="motivo">Motivo da Manutenção</label>
+                <textarea class="form-control" id="motivo" name="Motivo_Manutencao" rows="3">@Model.peritagem.MotivoManutencao</textarea>
+            </div>
+            <div class="form-group">
+                <label for="referencia">Aplicação</label>
+                <textarea class="form-control" id="aplicacao" name="Aplicacao" rows="3">@Model.peritagem.Aplicacao</textarea>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="observacao">Observações</label>
+                    <textarea class="form-control" id="observacao" name="Observacao" rows="3">@Model.peritagem.Observacao</textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
+                        <label for="documento">Lista de Arquivos</label>
+
+                        <table class="table table-striped">
+
+                            <tbody>
+                                @{
+                                    foreach (var d in Model.peritagem.ListDoc)
+                                    {
+                                        <tr>
+                                            <td>@d.Nome</td>
+                                            <td>
+                                                <a target="_blank" href="../@d.Caminho"><img src="~/images/clips.png" style="width:15px" /> Abrir <br /></a>
+                                            </td>
+                                            <td>
+                                                <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action( "ExcluirDocumento", "Peritagem", new { ID_Peritagem = Model.ID_Peritagem, ID = d.Id })">Excluir</a></li>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" name="ID_Peritagem" value="@Model.peritagem.Id" />
+            <input type="submit" class="btn btn-primary mb-2" value="Gravar" />
+
+        </form>
+    </div>
+</div>
+
+<script src="~/js/ConversorData.js"></script>

@@ -1,0 +1,1283 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "PDF";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="~/css/style-layout.css">
+    <link rel="stylesheet" href="~/bootstrap-dist/css/bootstrap.min.css">
+
+    <title>>@ViewData["Title"] - Fresadora Santana</title>
+
+</head>
+
+<body>
+    <div id="master">
+        <div id="main_pdf">
+            <!-- Cabeçalho-->
+            <div class="divPdfFolha">
+                <table id="tabela_visualizar_cabecalho">
+                    <tbody>
+                        <tr>
+                            <td rowspan="2"><img id="#logo" src="~/images/logo-fresadora-santana.png" alt="Fresadora Santana" /></td>
+                            <td><h1>Fresadora Santana</h1></td>
+                        </tr>
+                        <tr>
+                            <td><h3>Sistema de Peritagem</h3></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <table id="tabela_visualizar">
+                    <tbody>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="4"><h5>Informações da Peritagem</h5></td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td colspan="2"><strong>Empresa</strong></td>
+                            <td colspan="2"><img src="../@Model.peritagem.Cliente.Icone" style="width:40px;" />   @Model.peritagem.Cliente.Nome</td>
+                        </tr>
+
+                        <tr class="trNormal">
+                            <td><strong>Nota Fiscal</strong></td>
+                            <td>@Model.peritagem.Nfe</td>
+                            <td><strong>Nº Contrato</strong></td>
+                            <td>@Model.peritagem.NumeroContrato</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Orçamento</strong></td>
+                            <td>@Model.peritagem.ID_Orcamento</td>
+                            <td><strong>Protocolo</strong></td>
+                            <td>@Model.peritagem.Protocolo</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Responsável</strong></td>
+                            <td>@Model.peritagem.UsuarioCriador.Nome</td>
+                            <td><strong>Data de Cadastro</strong></td>
+                            <td>@Model.peritagem.Dt_Cadastro</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Data de Chegada:</strong></td>
+                            <td>@Model.peritagem.Dt_Chegada</td>
+                            <td><strong>Data de Recebimento:</strong></td>
+                            <td>@Model.peritagem.Dt_Inicio</td>
+
+                        </tr>
+
+                        <tr class="trNormal">
+                            <td><strong>Previsão de Entrega</strong></td>
+                            <td>@Model.peritagem.Dt_Previsao</td>
+                            <td><strong>Data de Revisao</strong></td>
+                            <td>@Model.peritagem.Dt_Revisao</td>
+                        </tr>
+
+                        <tr class="trNormal">
+                            <td><strong>Previsão de Finalização</strong></td>
+                            <td>@Model.peritagem.Dt_Finalizacao</td>
+                            <td><strong>Status</strong></td>
+                            @{
+                                if (Model.peritagem.Ativo)
+                                {
+                                    <td>Finalizado</td>
+                                }
+                                else
+                                {
+                                    <td>Em Andamento</td>
+
+                                }
+                            }
+                        </tr>
+
+                        <tr class="trNormal">
+                            <td><strong>Referência</strong></td>
+                            <td colspan="5"> @Model.peritagem.Referencia</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Aplicação</strong></td>
+                            <td colspan="5"> @Model.peritagem.Aplicacao</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Observação</strong></td>
+                            <td colspan="5"> @Model.peritagem.Observacao</td>
+                        </tr>
+                        <tr class="trNormal">
+                            <td><strong>Motivo man.</strong></td>
+                            <td colspan="5"> @Model.peritagem.MotivoManutencao</td>
+                        </tr>
+
+                        <tr style="border:0; height:10px;"></tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="divPdfFolha">
+                <h2 id="titulo-form">Informações do Equipamento</h2>
+
+                <table id="tabela_visualizar">
+
+                    <tbody>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="6"><h5> Informações do Equipamento </h5></td>
+                        </tr>
+                        @{
+                            foreach (var redutor in Model.listRedutor)
+                            {
+                                <tr class="trNormal">
+                                    <td rowspan="4">
+                                        @if (redutor.Capa != null)
+                                        {
+                                            <img src="~/@redutor.Capa" alt="@redutor.Capa" style="width:100px;height:auto" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/logo-fresadora-santana.png" alt="@redutor.Capa" style="width:100px;height:auto" />
+                                        }
+
+                                    </td>
+                                    <td colspan="2"><strong>Nome</strong></td>
+                                    <td colspan="3">@redutor.Nome</td>
+
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td colspan="2"><strong>Info</strong></td>
+                                    <td colspan="3">@redutor.TipoDados</td>
+
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td colspan="2"><strong>Modelo</strong></td>
+                                    <td colspan="3">@redutor.Modelo</td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td colspan="2"><strong>Fabricante</strong></td>
+                                    <td colspan="3">@redutor.Fabricante</td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Redução</strong></td>
+                                    <td colspan="2">@redutor.Reducao</td>
+                                    <td><strong>Volume</strong></td>
+                                    <td colspan="2">@redutor.Volume</td>
+                                </tr>
+
+                                <tr class="trNormal">
+
+                                    <td><strong>Lubrificação</strong></td>
+                                    <td colspan="2">@redutor.Lubrificacao</td>
+                                    <td><strong>Viscosidade</strong></td>
+                                    <td colspan="2">@redutor.Viscosidade</td>
+
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Rotação IN</strong></td>
+                                    <td>@redutor.RotacaoIN</td>
+                                    <td><strong>Rotação OUT</strong></td>
+                                    <td>@redutor.RotacaoOUT</td>
+                                    <td><strong>Potência</strong></td>
+                                    <td>@redutor.Potencia</td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Sentido</strong></td>
+                                    <td>@redutor.Sentido</td>
+                                    <td><strong>Pintura PS</strong></td>
+                                    @if (redutor.PinturaPadraoSantana)
+                                    {
+                                        <td>Sim</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Não</td>
+
+                                    }
+                                    <td><strong>Ano Fabric.</strong></td>
+                                    <td>@redutor.AnoFabricacao</td>
+
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Cor</strong></td>
+                                    <td>@redutor.Cor</td>
+                                    <td><strong>Peso</strong></td>
+                                    <td>@redutor.Peso</td>
+                                    <td><strong>Fator Serviço</strong></td>
+                                    <td>@redutor.FatorServico</td>
+                                </tr>
+
+
+                                <tr class="trNormal">
+                                    <td><strong>Desenho</strong></td>
+                                    <td colspan="2">@redutor.Desenho</td>
+                                    <td><strong>Visto</strong></td>
+                                    <td colspan="2">@redutor.Visto</td>
+
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Aplicação</strong></td>
+                                    <td colspan="5">@redutor.Aplicacao</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Mot. Manutenção.</strong></td>
+                                    <td colspan="5">@redutor.MotivoManutencao</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Pos. Montagem</strong></td>
+                                    <td colspan="5">@redutor.PosicaoMontagem</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Outros</strong></td>
+                                    <td colspan="5">@redutor.Outro</td>
+                                </tr>
+                                <tr style="border:0; height:10px;"></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="divPdfFolha">
+                <h2 id="titulo-form">Acionamento</h2>
+
+
+                <table id="tabela_visualizar">
+                    <tbody>
+
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h5>Acionamento</h5></td>
+                        </tr>
+                        @{
+                            if (Model.acionamento != null)
+                            {
+                                <tr class="trNormal">
+                                    <td rowspan="4">
+                                        @if (Model.acionamento.Capa != null)
+                                        {
+                                            <img src="~/@Model.acionamento.Capa" alt="@Model.acionamento.Capa" style="width:100px;height:auto" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/logo-fresadora-santana.png" alt="Logo da Fresadora Santana" style="width:100px;height:auto" />
+                                        }
+
+                                    </td>
+                                    <td><strong>Tipo</strong></td>
+                                    <td>@Model.acionamento.TipoAcionamento</td>
+                                    <td><strong>Condição</strong></td>
+                                    <td>@Model.acionamento.Disposicao.Nome</td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Fabricante</strong></td>
+                                    <td>@Model.acionamento.Fabricante</td>
+                                    <td><strong>Modelo</strong></td>
+                                    <td>@Model.acionamento.Modelo</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Rotação Polos</strong></td>
+                                    <td>@Model.acionamento.RotacaoPolos</td>
+                                    <td><strong>Potência</strong></td>
+                                    <td>@Model.acionamento.Potencia</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Carcaça</strong></td>
+                                    <td>@Model.acionamento.Carcaca</td>
+                                    <td><strong>Teste do Redutor</strong></td>
+                                    <td>
+                                        @{ if (Model.acionamento.Teste)
+                                            { <p>Sim</p> }
+                                            else
+                                            {<p>Não</p> }
+                                        }
+                                    </td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Tipo de Teste</strong></td>
+                                    <td>@Model.acionamento.TipoTeste</td>
+                                    <td><strong>Inspeção Visual</strong></td>
+                                    <td colspan="2">@Model.acionamento.InspecaoVisual</td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Descrição</strong></td>
+                                    <td colspan="5">@Model.acionamento.Descricao</td>
+                                </tr>
+
+                                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+            
+        <div class="divPdfFolha">
+            <h2 id="titulo-form">Carcaça</h2>
+
+            <table id="tabela_visualizar">
+                <tbody>
+                    @{
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="8"><h5>Carcaça</h5></td>
+                        </tr>
+
+                        foreach (var car in Model.listCarcaca)
+                        {
+                                <tr class="tabela_visualizar_titulo_item">
+                                    <td colspan="8"><strong>Carcaça  -  @car.Id</strong></td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td rowspan="4">
+                                        @if (car.Capa != null)
+                                        {
+                                            <img src="~/@car.Capa" alt="@car.Capa" style="width:100px;height:auto" />
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/logo-fresadora-santana.png" alt="Logo da Fresadora Santana" style="width:100px;height:auto" />
+                                        }
+                                    </td>
+                                    <td><strong>Jeteamento</strong></td>
+                                    <td>
+                                        @{
+                                            if (car.Jateamento)
+                                            {
+                                                <p>Sim</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Não</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td><strong>Med. Alinhamento</strong></td>
+                                    <td>
+                                        @{
+                                            if (car.MedicaoAlinhamento)
+                                            {
+                                                <p>Sim</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Não</p>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Altura</strong></td>
+                                    <td>@car.Altura</td>
+                                    <td><strong>Largura</strong></td>
+                                    <td>@car.Largura</td>
+
+                                </tr>
+                                <tr class="trNormal">
+                                    <td><strong>Comprimento</strong></td>
+                                    <td>@car.Comprimento</td>
+                                    <td><strong>Condição</strong></td>
+                                    <td>@car.Disposicao.Nome</td>
+                                </tr>
+
+                                <tr class="trNormal">
+                                    <td><strong>Produto</strong></td>
+                                    <td colspan="5">@car.Descricao</td>
+                                </tr>
+                                <tr class="tabela_visualizar_titulo_item">
+                                    <td colspan="2">Pos.</td>
+                                    <td colspan="2">Medição</td>
+                                    <td colspan="2">Tolerância</td>
+                                </tr>
+                                @foreach (var med in car.Medicao)
+                                {
+                                    <tr class="trNormal">
+                                        <td colspan="2">@med.Posicao</td>
+                                        <td colspan="2">@med.Medicao</td>
+                                        <td colspan="2">@med.Tolerancia</td>
+                                    </tr>
+                                    <tr class="trDescricao" style="height:40px;">
+                                        <td><strong>Descrição</strong></td>
+                                        <td colspan="5"> @med.Descricao</td>
+                                    </tr>
+                                }
+                                <tr style="height:30px;"></tr>
+                                            }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+            
+            
+        <div class="divPdfFolha">
+            <h2 id="titulo-form">Lista de Peças</h2>
+           
+
+            @{
+                if (Model.listPeca.Count != 0) {
+                    foreach (var it in Model.listPeca)
+                    {
+                    <table id="tabela_visualizar">
+                        <tbody>
+                            <tr class="tabela_visualizar_titulo">
+                                <td colspan="6"><h6>Peça - @it.Nome </h6></td>
+                            </tr>
+                            <tr class="trNormal">
+                                <td rowspan="4" colspan="2">
+                                    @if (it.Capa != null)
+                                    {
+                                        
+                                        <img src="~/@it.Capa" alt="@it.Capa" style="width:100px;height:auto" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/logo-fresadora-santana.png" alt="Logo da Fresadora Santana" style="width:100px;height:auto" />
+                                    }
+
+                                </td>
+                                <td><strong>Tipo</strong></td>
+                                <td>@it.TipoPeca.Nome</td>
+                                <td><strong>Nome</strong></td>
+                                <td>@it.Nome</td>
+                            </tr>
+
+                            <tr class="trNormal">
+                                <td><strong>Condição</strong></td>
+                                <td>@it.Disposicao.Nome</td>
+                                <td><strong>Metodo Fabricação</strong></td>
+                                <td>@it.MetodoFabricacao</td>
+
+                            </tr>
+                            <tr class="trNormal">
+                                <td><strong>Material</strong></td>
+                                <td>@it.Material.Nome</td>
+                                <td><strong>Dureza</strong></td>
+                                <td>@it.Dureza</td>
+                            </tr>
+                            <tr class="trNormal">
+                                <td><strong>Furo</strong></td>
+                                <td>@it.Furo</td>
+                                <td><strong>Nº de Dentes</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr class="trNormal">
+                                <td><strong>Helicoildal</strong></td>
+                                @if (it.Helicoidal)
+                                {
+                                    <td>Sim</td>
+                                }
+                                else
+                                {
+                                    <td>Não</td>
+                                }
+
+                                <td><strong>Ang. pressão</strong></td>
+                                <td></td>
+                                <td><strong>Peso</strong></td>
+                                <td>@it.Peso</td>
+                            </tr>
+
+                            <tr class="trNormal">
+                                <td><strong>Sentido</strong></td>
+                                <td>@it.Sentido</td>
+                                <td><strong>Desenho</strong></td>
+                                <td>@it.Desenho</td>
+                                <td><strong>Trat. Term.</strong></td>
+                                <td>@it.TratamentoTermico</td>
+
+                            </tr>
+
+                            @if (it.TipoPeca.Id < 8)
+                            {
+                                <tr class="trNormal">
+                                    <td><strong>Valor K</strong></td>
+                                    <td colspan="2">@it.ValorK</td>
+                                    <td><strong>Modulo</strong></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            }
+
+
+                            <tr class="trNormal">
+                                <td><strong>Medidas</strong></td>
+                                <td>@it.Altura</td>
+                                <td><strong>Descrição</strong></td>
+                                <td colspan="3">@it.Descricao</td>
+                            </tr>
+                            @if (it.ListValorW.Count > 0)
+                            {
+                                <tr class="tabela_visualizar_titulo_item">
+                                    <td colspan="2">ID</td>
+                                    <td colspan="2">W</td>
+                                    <td colspan="2">Valor W</td>
+                                </tr>
+                            }
+
+                            @foreach (var w in it.ListValorW)
+                            {
+                                <tr class="trNormal">
+                                    <td colspan="2"><strong>@w.Id</strong></td>
+                                    <td colspan="2">@w.W</td>
+                                    <td colspan="2">@w.ValorW</td>
+                                </tr>
+                            }
+
+                            <tr style="border:0; height:30px;"></tr>
+
+                        </tbody>
+                    </table>
+                        foreach (var cro in it.Croqui)
+                        {
+                            if (cro.Width > cro.Height)
+                            {
+                            <div class="card" style="height:100%; margin-bottom:40px;margin-top:20px;">
+                                <div class="card-body" style="width: 100%; ">
+                                    <h3 id="titulo-form">Croqui - @cro.Id</h3>
+                                </div>
+                                <div class="card" style="width: 70%;margin-left:15%; height:auto">
+                                    <img src="../@cro.Path_Img" class="card-img-top" alt="@cro.Descricao">
+                                </div>
+                                <div class="card-body" style="width: 100%; ">
+                                    <p class="card-text"><strong>Descrição:</strong> @cro.Descricao.</p>
+                                </div>
+                            </div>
+                            }
+                            else
+                            {
+                            <div class="card" style="height:100%; margin-bottom:40px;margin-top:20px;">
+                                <div class="card-body" style="width: 100%; ">
+                                    <h3 id="titulo-form">Croqui - @cro.Id</h3>
+                                </div>
+                                <div class="card" style="width: 40%; margin-left:30%; height:auto">
+                                    <img src="../@cro.Path_Img" class="card-img-top" alt="@cro.Descricao">
+                                </div>
+                                <div class="card-body" style="width: 100%; ">
+                                    <p class="card-text"><strong>Descrição:</strong> @cro.Descricao.</p>
+                                </div>
+                            </div>
+                                }
+                            }
+
+                        }
+                    }
+                }
+        </div>
+            
+
+
+
+            <div class="divPdfFolha">
+
+                <h2 id="titulo-form">Itens Diversos</h2>
+
+
+                <!-----------------------------------------------BUJÕES----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h6>Bujões</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>cfc
+                            <th scope="col">Rosca</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Condição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 9 || bj.TipoItem.Nome == "Bujões")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Rosca</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+                <!-----------------------------------------------ENGRAXADEIRA ----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Engraxadeira</h6></td>
+
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Rosca</th>
+                            <th scope="col">Local Aplicado</th>
+                            <th scope="col">Condição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 12 || bj.TipoItem.Nome == "Engraxadeira")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Modelo</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.Rosca</td>
+                                        <td>@bj.LocalAplicado</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+
+                <!-----------------------------------------------CONEXOES / SENSORES / VALVULAS----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Conexões / Sensores / Válvulas</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Rosca</th>
+                            <th scope="col">Local Aplicado</th>
+                            <th scope="col">Condição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 13 || bj.TipoItem.Nome == "Conexões/Sensores/Válvulas - Itens de Lubrificação")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Modelo</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.Rosca</td>
+                                        <td>@bj.LocalAplicado</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------PARAFUSOS ----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="9"><h6>Parafusos</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Rosca</th>
+                            <th scope="col">Passo</th>
+                            <th scope="col">Comprimento</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Classe</th>
+                            <th scope="col">Local Aplicado</th>
+                            <th scope="col" style="font-size:10px;">Ruela de Pressão DIN-12</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 14 || bj.TipoItem.Nome == "Parafusos")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Rosca</td>
+                                        <td>@bj.Passo</td>
+                                        <td>@bj.Comprimento</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.Classe</td>
+                                        <td>@bj.LocalAplicado</td>
+                                        <td>
+                                            @if (bj.RuelaDePressaDin12)
+                                            {
+                                                <p>Sim</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Não</p>
+                                            }
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+                <!-----------------------------------------------PORCAS----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Porcas</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Rosca</th>
+                            <th scope="col">Passo</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Classe</th>
+                            <th scope="col">Local Aplicado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 15 || bj.TipoItem.Nome == "Porcas")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Rosca</td>
+                                        <td>@bj.Passo</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.Classe</td>
+                                        <td>@bj.LocalAplicado</td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+                <!-----------------------------------------------PINO DE GUIA----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h6>Pino de Guia</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Local Aplicado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 16 || bj.TipoItem.Nome == "Pino do Guia")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.LocalAplicado</td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+                <!-----------------------------------------------PINO ELÁSTICO----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h6>Pino Elástico</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Local Aplicado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 17 || bj.TipoItem.Nome == "Pino Elástico")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.LocalAplicado</td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------ARRUELAS DE PRESSÃO----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h6>Arruelas de Pressão</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Local Aplicado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 18 || bj.TipoItem.Nome == "Arruela de Pressão")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.LocalAplicado</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------ARRUELAS LISA----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="5"><h6>Arruelas Lisa</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Norma</th>
+                            <th scope="col">Local Aplicado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 19 || bj.TipoItem.Nome == "Arruela Lisa")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Norma.Nome</td>
+                                        <td>@bj.LocalAplicado</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------ROLAMENTOS----------------------------------------->
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Rolamento</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Fabricante</th>
+                            <th scope="col">Local Aplicado</th>
+                            <th scope="col">Observação</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 20 || bj.TipoItem.Nome == "Rolamento")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Codigo</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Fabricante</td>
+                                        <td>@bj.LocalAplicado</td>
+                                        <td>@bj.Observacao</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------RETENTORES DIN-3760 ----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Retentores DIN-3760</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Lábio</th>
+                            <th scope="col">Borracha</th>
+                            <th scope="col">Fabricante</th>
+                            <th scope="col">Local Aplicado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 21 || bj.TipoItem.Nome == "Retentor DIN-3760")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Labio</td>
+                                        <td>@bj.Borracha</td>
+                                        <td>@bj.Fabricante</td>
+                                        <td>@bj.LocalAplicado</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------ELEMENTOS DE VEDAÇÃO----------------------------------------->
+
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="6"><h6>Elementos de Vedação</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Material</th>
+                            <th scope="col">Local Aplicado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 22 || bj.TipoItem.Nome == "Retentor DIN-3760")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.Descricao</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Material.Nome</td>
+                                        <td>@bj.LocalAplicado</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------CHAVETAS----------------------------------------->
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="7"><h6>Chavetas</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Qtde</th>
+                            <th scope="col">L1</th>
+                            <th scope="col">L2</th>
+                            <th scope="col">L3</th>
+                            <th scope="col">Local Aplicado</th>
+                            <th scope="col">Condição</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 23 || bj.TipoItem.Nome == "Chaveta")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Quantidade</td>
+                                        <td>@bj.L1</td>
+                                        <td>@bj.L2</td>
+                                        <td>@bj.L3</td>
+                                        <td>@bj.LocalAplicado</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------CONTRA RECUO----------------------------------------->
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="6"><h6>Contra Recuo</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Condição</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Produto</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 24 || bj.TipoItem.Nome == "Contra Recuo")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                        <td>@bj.Marca</td>
+                                        <td>@bj.Modelo</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Produto</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                <!-----------------------------------------------HELICE----------------------------------------->
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="6"><h6>Hélice</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Condição</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Produto</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 25 || bj.TipoItem.Nome == "Hélice")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                        <td>@bj.Marca</td>
+                                        <td>@bj.Modelo</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Produto</td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+                <!-----------------------------------------------ACOPLAMENTO----------------------------------------->
+                <table id="tabela_visualizar">
+                    <thead>
+                        <tr class="tabela_visualizar_titulo">
+                            <td colspan="6"><h6>Acoplamento</h6></td>
+                        </tr>
+                        <tr class="tabela_visualizar_titulo_item">
+                            <th scope="col">ID</th>
+                            <th scope="col">Condição</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Modelo</th>
+                            <th scope="col">Dimensão</th>
+                            <th scope="col">Produto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var bj in Model.listItemDiverso)
+                            {
+                                if (bj.TipoItem.Id == 26 || bj.TipoItem.Nome == "Acoplamento")
+                                {
+                                    <tr>
+                                        <td>@bj.Id</td>
+                                        <td>@bj.Disposicao.Nome</td>
+                                        <td>@bj.Marca</td>
+                                        <td>@bj.Modelo</td>
+                                        <td>@bj.Dimensao</td>
+                                        <td>@bj.Produto</td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="album_lista">
+                @{
+                    foreach (var img in Model.listImagem)
+                    {
+                        <div class="album_img_pdf">
+                            @{
+                                if (img.Width > img.Height)
+                                {
+                                    <div class="card" style="height:100%">
+                                        <div class="card-body" style="width: 100%; ">
+                                            @{
+                                                if (img.ID_Peca != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Peça: </strong>@img.ID_Peca</p>
+                                                }
+                                                else if (img.ID_Acionamento != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Acionamento: </strong>@img.ID_Acionamento</p>
+                                                }
+                                                else if (img.ID_Carcaca != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Carcaca: </strong>@img.ID_Carcaca</p>
+                                                }
+                                                else if (img.ID_ItemDiverso != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Item Diverso: </strong>@img.ID_ItemDiverso</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="card-text"><strong>ID Peritagem: </strong>@img.ID_Peritagem</p>
+
+                                                }
+                                            }
+                                        </div>
+                                        <div class="card" style="width: 90%;margin-left:5%; height:auto">
+                                            <img src="../@img.Path_Img" class="card-img-top" alt="@img.Descricao" onclick="abrirTelaCheia('../@img.Path_Img')">
+                                        </div>
+                                        <div class="card-body" style="width: 100%; ">
+                                            <p class="card-text">@img.Descricao.</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="card" style="height:100%">
+                                        <div class="card-body" style="width: 100%; ">
+                                            @{
+                                                if (img.ID_Peca != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Peça: </strong>@img.ID_Peca</p>
+                                                }
+                                                else if (img.ID_Acionamento != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Acionamento: </strong>@img.ID_Acionamento</p>
+                                                }
+                                                else if (img.ID_Carcaca != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Carcaca: </strong>@img.ID_Carcaca</p>
+                                                }
+                                                else if (img.ID_ItemDiverso != 0)
+                                                {
+                                                    <p class="card-text"><strong>ID Item Diverso: </strong>@img.ID_ItemDiverso</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="card-text"><strong>ID Peritagem: </strong>@img.ID_Peritagem</p>
+
+                                                }
+                                            }
+                                        </div>
+                                        <div class="card" style="width: 50%; margin-left:25%; height:auto">
+                                            <img src="../@img.Path_Img" class="card-img-top" alt="@img.Descricao" onclick="abrirTelaCheia('../@img.Path_Img')">
+                                        </div>
+                                        <div class="card-body" style="width: 100%; ">
+                                            <p class="card-text">@img.Descricao.</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        </div>
+  </body>
+</html>

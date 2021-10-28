@@ -1,0 +1,33 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "ListarPeritagem";
+}
+
+
+<h2 id="titulo-form">Lista de Disposição</h2>
+<div id="main">
+    <div id="tabela-cliente">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var it in Model.listDisposicao)
+                    {
+                        <tr>
+                            <th scope="row">@it.ID_Disposicao</th>
+                            <td>@it.Nome</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

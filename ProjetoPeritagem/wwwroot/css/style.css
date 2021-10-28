@@ -1,0 +1,191 @@
+#top {
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    margin: 0 0 0 0;
+
+
+}
+#top-complete{
+    
+    width: 100%;
+    height: 100%;
+}
+#menu-top{
+    width: 100%;
+    margin-top:10px;
+    align-content:center;
+}
+#master{
+    width:100%;
+    height:auto;
+    position:absolute;
+}
+
+#menu-top label {
+    margin-top: 10px;
+}
+.menu-ul {
+    float: right;
+    display: flex;
+    position: relative;
+    margin-top: 5px;
+}
+#tabela{
+    width:90%;
+    margin-left:5%;
+}
+.menu-link {
+    list-style: none;
+    width: 14ch;
+    height: 100%;
+    display: block;
+    transition: 0.5;
+    float: right;
+    padding: 0 10px 0 10px;
+    text-align: center;
+    margin-top: inherit;
+    align-items: center
+}
+
+.menu-link a {
+    font-family: sans-serif;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 7px;
+    font-size: 18px;
+}
+.menu-ul li a:hover {
+   background-color:aqua;
+}
+
+#p-alerta {
+    color:red;
+    display:none;
+}
+
+#main {
+    width: 100%;
+    height: auto;
+}
+
+
+#main_menu{
+    width:30%;
+    height:100%;
+    overflow-y:scroll;
+    background-color:#808080;
+}
+
+main-conteudo {
+    width: 30%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #808080;
+}
+
+#formulario {
+    width: 60%;
+    margin-left: 20%;
+    background-color: gainsboro;
+}
+#titulo-form {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#header-top {
+    width: 90% !important;
+    margin-left: 5% !important;
+}
+#logo-img{
+    width:250px;
+    height:auto;
+    
+}
+
+#header {
+    width: 100%;
+    height: 100px;
+}    
+#TextDescricao{
+    width:100%;
+   font-size:10px;
+   justify-content:center;
+   align-content:center;
+   float:left;
+}
+#td-Imposto{
+    width:70px;
+    height:25px;
+    font-size:12px;
+}
+#tabela_completa{
+    width:100%;
+}
+#tabela_head {
+    min-width: 100%;
+    height: 50px;
+    font-size: 12px;
+    background-color: #0a0909;
+    color: #ffffff;
+}
+.top-tabela {
+    width: 100%;
+    height: 60px;
+    font-size: 12px;
+}
+
+
+#tabela_body {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+#div_tabela {
+    width: 100%;
+    min-height: 400px;
+    max-height: 500px;
+}
+
+.td-id-solcitacao {
+    width: 80px!important;
+    font-size:12px;
+    border:none;
+    padding:0;
+}
+.td-descricao {
+    min-width:250px!important;
+    max-width:350px;
+    align-items:center;
+    justify-content:center;
+}
+.p_descricao{
+    font-size:12px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.td-img {
+    width: 80px !important;
+    font-size: 12px;
+}
+.td-preco {
+    width: 80px!important;
+    font-size: 12px;
+}
+.td-imposto{
+    width:80px;
+}
+.td-declinado{
+    width:80px;
+    font-size:12px;
+}
+.td-qtde{
+    width:50px!important;
+    font-size:12px;
+}

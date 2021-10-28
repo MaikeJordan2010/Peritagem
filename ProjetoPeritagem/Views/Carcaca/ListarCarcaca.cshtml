@@ -1,0 +1,89 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Listar Carcaca";
+}
+
+<div>
+    <partial name="_SubMenu" />
+</div>
+
+
+<h2 id="titulo-form">Listar Carcaça</h2>
+
+<div id="main">
+    <div id="tabela-cliente">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th>Nome</th>
+                    <th>Peso</th>
+                    <th>Medição de Alinhamento</th>
+                    <th>Jateamento</th>
+                    <th>Cadastro</th>
+
+                    <th>
+                        <li class="btn_padrao_50"><a class="badge badge-info" href="@Url.Action( "InserirCarcaca", "Carcaca", new { ID_Peritagem = Model.peritagem.Id })">Inserir</a><br /></li>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var car in Model.listCarcaca)
+                    {
+                        <tr>
+                            <td>@car.Id</td>
+                            <td>@car.Nome</td>
+                            <td>@car.Peso</td>
+                            <td>
+                                @{
+                                    if (car.MedicaoAlinhamento)
+                                    {
+                                        <p>Sim</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Não</p>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @{
+                                    if (car.Jateamento)
+                                    {
+                                        <p>Sim</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Não</p>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @car.Dt_Cadastro
+                            </td>
+                            <td class="btn_padrao" rowspan="2">
+                                <li class="btn_padrao_50"><a class="badge badge-success" href="@Url.Action("ListarCroqui", "Croqui", new { ID_Peritagem = car.ID_Peritagem, ID_Carcaca = car.Id})">Croqui</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-info" href="@Url.Action( "ListarImagem", "Imagem", new { ID_Peritagem = car.ID_Peritagem, ID_Carcaca = car.Id})">Album</a><br /></li>
+                                <li class="btn_padrao_50"><a class="badge badge-warning" href="@Url.Action( "AlterarCarcaca", "Carcaca", new { ID_Peritagem = car.ID_Peritagem, ID_Carcaca = car.Id})">Alterar</a></li>
+                                <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action( "ExcluirCarcaca", "Carcaca", new { ID_Peritagem = car.ID_Peritagem, ID_Carcaca = car.Id})">Excluir</a></li>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Altura</strong></td>
+                            <td>@car.Altura.ToString()</td>
+                            <td><strong>Largura</strong></td>
+                            <td>@car.Largura</td>
+                            <td><strong>Comprimento</strong></td>
+                            <td>@car.Comprimento.ToString()</td>
+                        </tr>
+                        <tr class="lista_final_peritagem">
+                            <td><strong>Descrição</strong></td>
+                            <td colspan="9">@car.Descricao</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

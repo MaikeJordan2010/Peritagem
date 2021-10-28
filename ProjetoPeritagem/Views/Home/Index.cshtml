@@ -1,0 +1,59 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Peritagem";
+}
+
+
+<div id="main">
+    <h2 id="titulo-form">Pesquisar</h2>
+
+    <div id="formulario-pesquisa-home">
+
+        <form action="@Url.Action("Buscar","Home")" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="cliente">Cliente</label>
+                    <select type="text" class="form-control" id="cliente" name="ID_Cliente">
+                        <option value="0">Todas</option>
+
+                        @{
+                            foreach (var it in Model.listCliente)
+                            {
+                                <option value="@it.Id">@it.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="numNota">Nº Nota</label>
+                    <input type="text" class="form-control" id="numNota" name="NumeroNota" onkeypress="ValidarNumerosInteiro()" />
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="NomeEquipamento">Nome do Equipamento</label>
+                    <input type="text" class="form-control" name="NomeEquipamento" />
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="situacao">Situação</label>
+                    <select type="text" class="form-control" id="id_situacao" name="ID_Situacao">
+                        @{
+                            foreach (var it in Model.listSituacao)
+                            {
+                                <option value="@it.Id">@it.Descricao</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                    <input type="submit" value="Enviar" class="btn btn-primary mb-4" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script src="~/js//ValidadorCampos.js"></script>

@@ -1,0 +1,69 @@
+﻿@model ProjetoPeritagem.ViewHelper.ViewHelperPeritagem
+@{
+    ViewData["Title"] = "Listar Peças";
+}
+
+<partial name="_SubMenu" />
+
+<h2 id="titulo-form">Listar Peças</h2>
+<div id="main">
+    <div id="tabela">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Per/Peca</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Condição</th>
+                    <th scope="col">Nº Dentes</th>
+                    <th scope="col">Medidas</th>
+                    <th scope="col">Dureza</th>
+                    <th scope="col" style="width:170px">Anexo</th>
+                    <th scope="col" class="btn_padrao">
+                        <a class="badge badge-primary" href="@Url.Action( "InserirPeca", "Peca", new { ID_Peritagem = Model.ID_Peritagem })">Incluir</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var it in Model.listPeca)
+                    {
+                <tr>
+                    <td scope="row">@it.ID_Peritagem/@it.Id</td>
+                    <td>@it.TipoPeca.Nome</td>
+                    <td>@it.Nome</td>
+                    <td>@it.Disposicao.Nome</td>
+                    <td></td>
+                    <td>@it.Altura</td>
+                    <td>@it.Dureza</td>
+
+                    <td rowspan="3">
+                        @foreach (var doc in it.ListDocumentos)
+                        {
+                            <a target="_blank" href="../@doc.Caminho"><img src="~/images/clips.png" style="width:15px" /> @doc.Nome  <br /></a>
+                        }
+                    </td>
+                    <td class="btn_padrao" rowspan="2">
+                        <li class="btn_padrao_100"><a class="badge badge-success" href="@Url.Action("ListarCroqui", "Croqui", new { ID_Peca = it.Id, ID_Peritagem = it.ID_Peritagem })">Croqui</a><br /></li>
+                        <li class="btn_padrao_50"><a class="badge badge-warning" href="@Url.Action("AlterarPeca", "Peca", new { ID_Peca = it.Id, ID_Peritagem = it.ID_Peritagem })">Alterar</a><br /></li>
+                        <li class="btn_padrao_50"><a class="badge badge-danger" href="@Url.Action("ExcluirPeca", "Peca", new { ID_Peca = it.Id, ID_Peritagem = it.ID_Peritagem })">Excluir</a></li>
+                        <li class="btn_padrao_100"><a class="badge badge-info" href="@Url.Action("ListarImagem", "Imagem", new { ID_Peca = it.Id, ID_Peritagem = it.ID_Peritagem })">Album</a><br /></li>
+                    </td>
+                </tr>
+                       
+                        <tr>
+                            <td><strong>Descrição</strong></td>
+                            <td colspan="8">@it.Descricao</td>
+                        </tr>
+                        <tr class="lista_final_peritagem">
+                            <td><strong>Retrabalho</strong></td>
+                            <td colspan="8">@it.DescricaoRetrabalho</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
